@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 function Resource() {
   const { id } = useParams();
-  const [resource, setResource] = useState({});
 
-  useEffect(
-    function () {
-      async function fetchResources() {
-        try {
-          const res = await fetch(
-            `https://6562f1caee04015769a6a775.mockapi.io/resources/${id}`
-          );
-          const data = await res.json();
-          setResource(data);
-        } catch {
-          throw new Error("There was an issue retrieving resources");
-        }
-      }
-      fetchResources();
-    },
-    [id]
-  );
+  const { resource } = useSelector((store) => store.resource);
+  //   const [resource, setResource] = useState({});
+
+  //   useEffect(
+  //     function () {
+  //       async function fetchResources() {
+  //         try {
+  //           const res = await fetch(
+  //             `https://6562f1caee04015769a6a775.mockapi.io/resources/${id}`
+  //           );
+  //           const data = await res.json();
+  //           setResource(data);
+  //         } catch {
+  //           throw new Error("There was an issue retrieving resources");
+  //         }
+  //       }
+  //       fetchResources();
+  //     },
+  //     [id]
+  //   );
 
   const { createdAt, name, description, price, subject, type } = resource;
 

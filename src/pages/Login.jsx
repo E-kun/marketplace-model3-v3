@@ -1,6 +1,25 @@
 import { useState } from "react";
-import Button from "../components/Button";
+// import Button from "../components/Button";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Button, FormControl, InputLabel, OutlinedInput } from "@mui/material";
+
+import styled from "@emotion/styled";
+
+const StyledLoginInput = styled(FormControl)`
+  margin: 1rem;
+  padding: 1rem;
+`;
+
+const StyledLoginInputBox = styled.form`
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee7e7;
+`;
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -9,29 +28,23 @@ function Login() {
   return (
     <main>
       <Navbar />
-      <form>
+
+      <StyledLoginInputBox>
+        <StyledLoginInput>
+          <InputLabel htmlFor="username">Username</InputLabel>
+          <OutlinedInput id="username" label="Username"></OutlinedInput>
+        </StyledLoginInput>
+        <StyledLoginInput>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <OutlinedInput id="password" label="Password"></OutlinedInput>
+        </StyledLoginInput>
+        {/* App authenticates user after user clicks button */}
         <div>
-          <label htmlFor="username">Email/Username</label>
-          <input
-            type="email"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-          ></input>
+          <Button variant="contained">Login</Button>
         </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          ></input>
-        </div>
-        <div>
-          <Button>Login</Button>
-        </div>
-      </form>
+      </StyledLoginInputBox>
+
+      <Footer />
     </main>
   );
 }

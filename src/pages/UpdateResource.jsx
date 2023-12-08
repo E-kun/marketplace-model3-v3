@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
 
 function UpdateResource() {
   const [resourceName, setResourceName] = useState("");
@@ -53,6 +54,7 @@ function UpdateResource() {
           <Button>Create Resource</Button>
         </div>
       </form>
+      <Footer />
     </div>
   );
 }
