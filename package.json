@@ -11,6 +11,7 @@
     "server": "json-server --watch data/resources.json --port 9000 --delay 500"
   },
   "dependencies": {
+    "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
@@ -25,7 +26,8 @@
     "react-router-dom": "^6.20.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

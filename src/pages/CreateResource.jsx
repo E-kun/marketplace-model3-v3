@@ -12,6 +12,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import SubjectDropdownBox from "../components/SubjectDropdownBox";
 
 const CreateResourceInputs = styled.form`
   margin: 0 auto;
@@ -39,6 +40,7 @@ function CreateResource() {
   return (
     <>
       <Navbar />
+      <h2>Create a Resource</h2>
       <CreateResourceInputs>
         <CreateResourceInputListItem>
           <InputLabel htmlFor="resource-name">Resource Name</InputLabel>
@@ -57,23 +59,7 @@ function CreateResource() {
           ></TextField>
         </CreateResourceInputListItem>
 
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="subject-small-label">Subject</InputLabel>
-          <Select
-            size="small"
-            labelId="subject-small-label"
-            label="Subject"
-            id="subject"
-          >
-            <MenuItem value="">
-              <em>Select a Subject</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-
+        <SubjectDropdownBox />
         <CreateResourceInputListItem>
           <InputLabel htmlFor="resource-price">Price</InputLabel>
           <OutlinedInput id="resource-price" label="Price"></OutlinedInput>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from "./ResourceItem.module.css";
 
 import styled from "@emotion/styled";
+import { Grid, Paper } from "@mui/material";
 
 const StyledResourceName = styled.h3`
   align-self: flex-start;
@@ -12,10 +12,20 @@ const StyledResourceItem = styled.li`
   max-width: 900px;
 `;
 
-const StyledResourceUnName = styled.div`
+const StyledResourceLink = styled(Link)`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  align-content: space-between;
+  align-items: center;
+  /* padding: 0 1em; */
+`;
+
+const StyledResourceImage = styled.img`
+  margin-right: 1em;
+  margin: "auto";
+  display: "block";
+  max-width: 200px;
+  max-height: 150px;
 `;
 
 function ResourceItem({ resource }) {
@@ -23,20 +33,68 @@ function ResourceItem({ resource }) {
 
   return (
     <StyledResourceItem>
-      <Link className={styles.resourceItem} to={`${id}`}>
-        <div>
-          <div>
-            <StyledResourceName>{name}</StyledResourceName>
-          </div>
-          <StyledResourceUnName>
-            <h4>{description}</h4>
-            <h4>{subject}</h4>
-          </StyledResourceUnName>
-        </div>
-        <h4>RM{price}</h4>
-      </Link>
+      <StyledResourceLink to={`${id}`}>
+        <Paper
+          sx={{
+            p: 2,
+            margin: "auto",
+            maxWidth: 900,
+            flexGrow: 1,
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item>
+              <StyledResourceImage
+                src="/pexels-anni-roenkae-2156881.jpg"
+                alt="resource thumbnail"
+              />
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <StyledResourceName>{name}</StyledResourceName>
+                  <h4>{subject}</h4>
+                  <p>{description}</p>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <h4>RM{price}</h4>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      </StyledResourceLink>
     </StyledResourceItem>
   );
 }
+
+// function ResourceItem({ resource }) {
+//   const { name, price, subject, description, id } = resource;
+
+//   return (
+//     <StyledResourceItem>
+//       <StyledResourceLink to={`${id}`}>
+//         <Grid container spacing={3}>
+//           <Grid xs>
+//             <StyledResourceImage
+//               src="/pexels-anni-roenkae-2156881.jpg"
+//               alt="resource thumbnail"
+//             />
+//           </Grid>
+//           <Grid xs={6}>
+//             <ResourceDetails>
+//               <StyledResourceName>{name}</StyledResourceName>
+//               <h4>{subject}</h4>
+//               <p>{description}</p>
+//             </ResourceDetails>
+//           </Grid>
+//           <Grid xs>
+//             <h4>RM{price}</h4>
+//           </Grid>
+//         </Grid>
+//       </StyledResourceLink>
+//     </StyledResourceItem>
+//   );
+// }
 
 export default ResourceItem;

@@ -1,9 +1,8 @@
 .resourceList {
   width: 100%;
-  height: 65vh;
+  height: 100%;
   list-style: none;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
 
   display: flex;
   flex-direction: column;

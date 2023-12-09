@@ -5,30 +5,26 @@ import { useEffect, useState } from "react";
 import styles from "./ResourceList.module.css";
 
 import styled from "@emotion/styled";
-
-const ResourceHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin-top: 2rem;
-  background-color: white;
-  padding: 1em;
-`;
+import Spinner from "./Spinner";
 
 const ResourceListBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  max-height: 100%;
+  flex: 1;
 `;
 
 function ResourceList() {
   const [resources, setResources] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector((store) => store.resource);
+  // const { isLoading } = useSelector((store) => store.resource);
 
   useEffect(function () {
     // dispatch(setIsLoading());
+    setIsLoading(true);
 
     async function fetchResources() {
       try {
@@ -42,25 +38,19 @@ function ResourceList() {
       }
     }
     fetchResources();
+    setIsLoading(false);
   }, []);
 
-  console.log(resources);
   //   const dispatch = useDispatch();
   //   dispatch(getResources());
   //   const resources = getResources();
 
   //   console.log(resources);
 
+  if (isLoading) return <Spinner />;
+
   return (
     <ResourceListBox>
-      <ResourceHeader>
-        <div></div>
-        <div>Resource Name</div>
-        <div>Resource Description</div>
-        <div>Subject</div>
-        <div>Price</div>
-        <div></div>
-      </ResourceHeader>
       <ul className={styles.resourceList}>
         {resources.map((resource) => (
           <ResourceItem resource={resource} key={resource.id} />
