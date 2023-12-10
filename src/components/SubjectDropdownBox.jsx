@@ -4,14 +4,8 @@ import { useState } from "react";
 import { subjects } from "../data/subjects";
 
 function SubjectDropdownBox() {
-  const [val, setVal] = useState("");
-
-  subjects.map((subject) => {
-    console.log(subject.subjectId);
-  });
-
   return (
-    <FormControl sx={{ m: 1, minWidth: 180 }} size="medium">
+    <FormControl sx={{ m: 1, width: 180 }} size="medium">
       <InputLabel id="subject">Subject</InputLabel>
       <Select labelId="subject" id="subject" label="Subject">
         {subjects.map((subject) => (

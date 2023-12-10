@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
 import ResourceItem from "./ResourceItem";
-// import { getResources } from "../features/resources/resourceSlice";
-import { useEffect, useState } from "react";
 import styles from "./ResourceList.module.css";
 
 import styled from "@emotion/styled";
-import Spinner from "./Spinner";
+import { CircularProgress } from "@mui/material";
+import { useResources } from "../features/resources/useResources";
 
 const ResourceListBox = styled.div`
   display: flex;
@@ -16,38 +14,9 @@ const ResourceListBox = styled.div`
 `;
 
 function ResourceList() {
-  const [resources, setResources] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  const { isLoading, resources } = useResources();
 
-  // const { isLoading } = useSelector((store) => store.resource);
-
-  useEffect(function () {
-    // dispatch(setIsLoading());
-    setIsLoading(true);
-
-    async function fetchResources() {
-      try {
-        const res = await fetch(
-          `https://6562f1caee04015769a6a775.mockapi.io/resources`
-        );
-        const data = await res.json();
-        setResources(data);
-      } catch {
-        throw new Error("There was an issue retrieving resources");
-      }
-    }
-    fetchResources();
-    setIsLoading(false);
-  }, []);
-
-  //   const dispatch = useDispatch();
-  //   dispatch(getResources());
-  //   const resources = getResources();
-
-  //   console.log(resources);
-
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <CircularProgress />;
 
   return (
     <ResourceListBox>

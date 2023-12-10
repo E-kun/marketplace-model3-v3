@@ -1,25 +1,12 @@
-import { NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
-import Logo from "./Logo";
-
+import { Link, NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
-
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Container, Grid, IconButton, Toolbar } from "@mui/material";
 
-const StyledToolBar = styled(Toolbar)`
-  display: flex;
-  align-content: stretch;
-`;
-
-const StyledBox = styled.div`
-  display: flex;
-`;
+import Logo from "./Logo";
+import Logout from "./Logout";
+import { useUserSession } from "../features/users/useUserSession";
+import PersonIcon from "@mui/icons-material/Person";
 
 const StyledNavLink = styled(NavLink)`
   padding: 1.2rem 4.8rem;
@@ -30,51 +17,49 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const StyledLinks = styled.div`
-  margin-left: auto;
+const UserCorner = styled(Grid)`
   display: flex;
+  flex-direction: row;
+  align-content: center;
   justify-content: flex-end;
-  align-items: end;
-  padding: 1.2rem 4.8rem;
 `;
 
 function Navbar() {
+  const { isAuthenticated } = useUserSession();
+
   return (
-    <StyledBox>
-      <AppBar position="static">
-        <StyledToolBar>
-          <Logo />
-
-          <StyledLinks>
-            <StyledNavLink to="/catalogue">Catalogue</StyledNavLink>
-
-            <StyledNavLink to="/createResource">Create Resource</StyledNavLink>
-            <StyledNavLink to="/login">Login</StyledNavLink>
-          </StyledLinks>
-        </StyledToolBar>
-      </AppBar>
-    </StyledBox>
-  );
-}
-
-{
-  /* <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Grid item xs="auto">
+            <Logo />
+          </Grid>
+          <Grid item sm={12} container>
+            <Grid item sm={12} container direction="row">
+              <StyledNavLink to="/catalogue">Catalogue</StyledNavLink>
+              <StyledNavLink to="/createResource">
+                Create Resource
+              </StyledNavLink>
+            </Grid>
+          </Grid>
+          <Grid item sm="auto">
+            {!isAuthenticated ? (
+              <StyledNavLink to="/login">Log in</StyledNavLink>
+            ) : (
+              <UserCorner>
+                <StyledNavLink to="/profile">Profile</StyledNavLink>
+                {/* <IconButton>
+                  <PersonIcon fontSize="large" />
+                  
+                </IconButton> */}
+                <Logout />
+              </UserCorner>
+            )}
+          </Grid>
         </Toolbar>
-      </AppBar> */
+      </Container>
+    </AppBar>
+  );
 }
 
 export default Navbar;

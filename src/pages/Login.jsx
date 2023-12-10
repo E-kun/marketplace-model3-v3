@@ -1,17 +1,21 @@
 import { useState } from "react";
-// import Button from "../components/Button";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Button, FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 
 import styled from "@emotion/styled";
+import useLogin from "../features/users/useLogin";
 
 const StyledLoginInput = styled(FormControl)`
   margin: 1rem;
   padding: 1rem;
 `;
 
-const StyledLoginInputBox = styled.form`
+const StyledLoginForm = styled.form`
   min-height: 450px;
   display: flex;
   flex-direction: column;
@@ -22,30 +26,60 @@ const StyledLoginInputBox = styled.form`
 `;
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  return (
-    <main>
-      <Navbar />
+  const { authenticateUser, isLoading } = useLogin();
 
-      <StyledLoginInputBox>
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) return;
+    authenticateUser(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      }
+    );
+  }
+
+  return (
+    <>
+      <h1>Log In</h1>
+      <StyledLoginForm onSubmit={handleSubmit}>
         <StyledLoginInput>
-          <InputLabel htmlFor="username">Username</InputLabel>
-          <OutlinedInput id="username" label="Username"></OutlinedInput>
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <OutlinedInput
+            id="email"
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
+          ></OutlinedInput>
         </StyledLoginInput>
         <StyledLoginInput>
           <InputLabel htmlFor="password">Password</InputLabel>
-          <OutlinedInput id="password" label="Password"></OutlinedInput>
+          <OutlinedInput
+            id="password"
+            label="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
+          ></OutlinedInput>
         </StyledLoginInput>
         {/* App authenticates user after user clicks button */}
         <div>
-          <Button variant="contained">Login</Button>
+          <Button
+            variant="contained"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
+            {!isLoading ? "Login" : <CircularProgress />}
+          </Button>
         </div>
-      </StyledLoginInputBox>
-
-      <Footer />
-    </main>
+      </StyledLoginForm>
+    </>
   );
 }
 

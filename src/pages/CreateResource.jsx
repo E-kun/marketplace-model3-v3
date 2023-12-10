@@ -1,20 +1,16 @@
-import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 import styled from "@emotion/styled";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField,
-} from "@mui/material";
-import SubjectDropdownBox from "../components/SubjectDropdownBox";
+import { Button, FormControl } from "@mui/material";
 
-const CreateResourceInputs = styled.form`
+import { useCreateResource } from "../features/resources/useCreateResource";
+import { useForm } from "react-hook-form";
+
+import Form from "../components/forms/Form";
+import FormInputText from "../components/forms/FormInputText";
+import FormInputTextLong from "../components/forms/FormInputTextLong";
+import FormInputDropdown from "../components/forms/FormInputDropdown";
+import { useUserSession } from "../features/users/useUserSession";
+
+const CreateResourceForm = styled.form`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -25,59 +21,59 @@ const CreateResourceInputs = styled.form`
   /* box-shadow: -2px 2px 5px; */
 `;
 
-const CreateResourceInputListItem = styled(FormControl)`
-  margin: 1rem;
-  max-width: 100%;
-  width: 100%;
-`;
-
 function CreateResource() {
-  const [resourceName, setResourceName] = useState("");
-  const [resourceDescription, setResourceDescription] = useState("");
-  const [subject, setSubject] = useState("");
-  const [price, setPrice] = useState(0);
+  const { isCreating, createResource } = useCreateResource();
+  const { isAuthenticated, user } = useUserSession();
+
+  const isWorking = isCreating;
+
+  const { handleSubmit, reset, control, setValue } = useForm({
+    defaultValues: {},
+  });
+
+  function onSubmit(data) {
+    // console.log(user);
+    data.author = "John Smith";
+    createResource(data);
+  }
+
+  function onError(errors) {
+    console.log(errors);
+  }
 
   return (
     <>
-      <Navbar />
       <h2>Create a Resource</h2>
-      <CreateResourceInputs>
-        <CreateResourceInputListItem>
-          <InputLabel htmlFor="resource-name">Resource Name</InputLabel>
-          <OutlinedInput
-            id="resource-name"
-            label="Resource Name"
-          ></OutlinedInput>
-        </CreateResourceInputListItem>
+      <Form>
+        <FormInputText
+          name={"name"}
+          control={control}
+          label={"Resource Name"}
+        />
+        <FormInputTextLong
+          name={"description"}
+          control={control}
+          label={"Resource Description"}
+        />
+        <FormInputDropdown
+          name="subject"
+          control={control}
+          label="Subject"
+          type="subjects"
+        />
 
-        <CreateResourceInputListItem>
-          <TextField
-            id="resource-description"
-            label="Resource Description"
-            multiline
-            rows={10}
-          ></TextField>
-        </CreateResourceInputListItem>
+        <FormInputDropdown
+          name="file_type"
+          control={control}
+          label="File Type"
+          type="filetypes"
+        />
 
-        <SubjectDropdownBox />
-        <CreateResourceInputListItem>
-          <InputLabel htmlFor="resource-price">Price</InputLabel>
-          <OutlinedInput id="resource-price" label="Price"></OutlinedInput>
-        </CreateResourceInputListItem>
-
-        <Button variant="contained">Create Resource</Button>
-      </CreateResourceInputs>
-
-      <Footer />
+        <FormInputText name={"price"} control={control} label={"Price"} />
+        <Button onClick={handleSubmit(onSubmit)}>Create Resource</Button>
+      </Form>
     </>
   );
 }
-
-// <TextField
-// type="text"
-// id="resourceName"
-// onChange={(e) => setResourceName(e.target.value)}
-// value={resourceName}
-// ></TextField>
 
 export default CreateResource;

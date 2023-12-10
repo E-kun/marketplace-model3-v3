@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import Button from "../components/Button";
+import Button from "../components/CustomButton";
 import Footer from "../components/Footer";
 
 function UpdateResource() {
