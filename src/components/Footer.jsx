@@ -11,6 +11,7 @@ function Footer() {
       <p className={styles.copyright}>
         &copy; Copyright {new Date().getFullYear()} by Edcatus
       </p>
+      <p>Alpha version 1.0.0</p>
     </StyledFooter>
   );
 }

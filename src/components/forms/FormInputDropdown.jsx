@@ -1,16 +1,11 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-import { subjects } from "../../data/subjects";
+import { subjects, subjectCodes } from "../../data/subjects";
 import { filetypes } from "../../data/filetypes";
+import { levels } from "../../data/levels";
 
 import styled from "@emotion/styled";
-
-const CreateResourceInputListItem = styled(FormControl)`
-  margin: 1rem;
-  max-width: 100%;
-  width: 100%;
-`;
 
 function FormInputDropdown({ name, control, label, type }) {
   let options = [];
@@ -24,6 +19,12 @@ function FormInputDropdown({ name, control, label, type }) {
     options = filetypes;
     inputId = "filetype";
   }
+
+  if (type === "levels") {
+    options = levels;
+    inputId = "level";
+  }
+
   return (
     <FormControl sx={{ m: 1, width: 180 }} size="medium">
       <InputLabel id={inputId}>{label}</InputLabel>
@@ -37,7 +38,7 @@ function FormInputDropdown({ name, control, label, type }) {
             value={value}
           >
             {options.map((option) => (
-              <MenuItem value={option.name} key={option.subjectId}>
+              <MenuItem value={option.id} key={option.id}>
                 {option.name}
               </MenuItem>
             ))}

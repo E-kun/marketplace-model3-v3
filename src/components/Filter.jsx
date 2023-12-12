@@ -1,17 +1,9 @@
 import styled from "@emotion/styled";
-import {
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Button, FormControl, FormGroup } from "@mui/material";
 
-import SubjectDropdownBox from "./SubjectDropdownBox";
-import { TimeToLeaveOutlined } from "@mui/icons-material";
+import FormInputDropdown from "./forms/FormInputDropdown";
+import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
 
 const StyledFilterWindow = styled.div`
   max-width: 200px;
@@ -41,60 +33,56 @@ const StyledFilterGroupTitle = styled.h4`
   margin: 0 auto;
 `;
 
-const levels = [
-  "Primary 1",
-  "Primary 2",
-  "Primary 3",
-  "Primary 4",
-  "Primary 5",
-  "Primary 6",
-  "Form 1",
-  "Form 2",
-  "Form 3",
-  "Form 4",
-  "Form 5",
-  "Form 6",
-  "A-Levels",
-  "O-Levels",
-];
-
-const resourceTypes = ["PDF", "Audio", "Video"];
-
 function Filter() {
-  // subjects.map((subject) => {
-  //   console.log([subject.subjectId, subject.name]);
-  // });
+  const [searchParams, setSearchParams] = useSearchParams({});
+  // const currentFilter = searchParams.get(filterField) || options.at(0).value;
+
+  const { handleSubmit, reset, control, resetField } = useForm({
+    defaultValues: {},
+  });
+
+  function onSubmit(value) {
+    console.log(value);
+    // searchParams.set([
+    //   ["subject", value.subject],
+    //   ["level", value.level],
+    //   ["file_type", value.file_type],
+    // ]);
+
+    setSearchParams({
+      subject_id: value.subject_id,
+      level: value.level,
+      file_type: value.file_type,
+    });
+    // reset();
+  }
 
   return (
     <StyledFilterWindow>
-      <SubjectDropdownBox />
-      <FormControl sx={{ m: 1, minWidth: 180 }} size="string">
-        <InputLabel id="level">Level</InputLabel>
-        <Select labelId="level" id="level" label="Level">
-          {levels.map((level) => (
-            <MenuItem value={level} key={level}>
-              {level}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <FormInputDropdown
+        name="subject_id"
+        control={control}
+        label="Subject"
+        type="subjects"
+      />
 
-      <FormControl sx={{ m: 1, minWidth: 180 }} size="string">
-        <InputLabel id="resource-type">Resource Type</InputLabel>
-        <Select
-          labelId="resource-type"
-          id="resource-type"
-          label="Resource Type"
-        >
-          {resourceTypes.map((type) => (
-            <MenuItem value={type} key={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <FormInputDropdown
+        name="level"
+        control={control}
+        label="Level"
+        type="levels"
+      />
 
-      <Button variant="contained">Filter</Button>
+      <FormInputDropdown
+        name="file_type"
+        control={control}
+        label="File Type"
+        type="filetypes"
+      />
+
+      <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+        Filter
+      </Button>
     </StyledFilterWindow>
   );
 }

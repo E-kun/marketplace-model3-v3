@@ -1,4 +1,5 @@
 import supabase from "./supabase";
+import { subjects } from "../data/subjects";
 
 export async function getResources() {
   const { data, error } = await supabase.from("resources").select("*");
@@ -7,6 +8,12 @@ export async function getResources() {
     console.error(error);
     throw new Error("Could not retrieve resources");
   }
+  return data;
+}
+
+export async function getSubjects() {
+  const data = subjects;
+
   return data;
 }
 

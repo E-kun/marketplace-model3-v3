@@ -9,6 +9,7 @@ import FormInputText from "../components/forms/FormInputText";
 import FormInputTextLong from "../components/forms/FormInputTextLong";
 import FormInputDropdown from "../components/forms/FormInputDropdown";
 import { useUserSession } from "../features/users/useUserSession";
+import { useFilter } from "../features/resources/useFilter";
 
 const CreateResourceForm = styled.form`
   margin: 0 auto;
@@ -24,7 +25,7 @@ const CreateResourceForm = styled.form`
 function CreateResource() {
   const { isCreating, createResource } = useCreateResource();
   const { isAuthenticated, user } = useUserSession();
-
+  const { subjects } = useFilter();
   const isWorking = isCreating;
 
   const { handleSubmit, reset, control, setValue } = useForm({
@@ -33,7 +34,14 @@ function CreateResource() {
 
   function onSubmit(data) {
     // console.log(user);
+    // console.log(data);
+    // console.log(subjects);
+    let tempSubject = subjects.filter(
+      (subject) => subject.id === data.subject_id
+    );
+    data.subject = tempSubject[0].name;
     data.author = "John Smith";
+
     createResource(data);
   }
 
@@ -56,7 +64,7 @@ function CreateResource() {
           label={"Resource Description"}
         />
         <FormInputDropdown
-          name="subject"
+          name="subject_id"
           control={control}
           label="Subject"
           type="subjects"
