@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/css";
@@ -6,6 +6,7 @@ import { useResources } from "../features/resources/useResources";
 import { useDeleteResource } from "../features/resources/useDeleteResource";
 import { Paper } from "@mui/material";
 import CustomButton from "./CustomButton";
+import { useUserSession } from "../features/users/useUserSession";
 
 const ResourceListing = styled(Paper)`
   margin: 2em auto;
@@ -46,9 +47,11 @@ const ResourceDetails = styled.div`
 const imageList = ["1", "2", "3", "4", "5", "6", "7"];
 
 function Resource() {
+  const { user, isAuthenticated } = useUserSession();
   const { resourceId } = useParams();
   const { resources } = useResources();
   const { isDeleting, deleteResource } = useDeleteResource();
+  const navigate = useNavigate();
 
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
@@ -66,6 +69,10 @@ function Resource() {
   } = filteredResource[0];
 
   // console.log(filteredResource[0]);
+
+  function handleEditButton() {
+    navigate("/updateResource", { replace: true });
+  }
 
   return (
     <>
@@ -106,14 +113,26 @@ function Resource() {
           </div>
         </ResourceDetails>
       </ResourceListing>
-      <CustomButton
-        disabled={isDeleting}
-        handleClick={() => deleteResource(resourceId)}
-        variant="contained"
-        color="error"
-      >
-        Delete Resource
-      </CustomButton>
+      {isAuthenticated && (
+        <>
+          <CustomButton
+            disabled={isDeleting}
+            handleClick={handleEditButton}
+            variant="contained"
+            color="primary"
+          >
+            Edit Resource
+          </CustomButton>
+          <CustomButton
+            disabled={isDeleting}
+            handleClick={() => deleteResource(resourceId)}
+            variant="contained"
+            color="error"
+          >
+            Delete Resource
+          </CustomButton>
+        </>
+      )}
       <ResourceGallery>
         {imageList.map((image) => (
           <li

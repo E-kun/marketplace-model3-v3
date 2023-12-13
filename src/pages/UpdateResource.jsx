@@ -1,61 +1,66 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+
 import Button from "../components/CustomButton";
-import Footer from "../components/Footer";
+
+import Form from "../components/forms/Form";
+import FormInputText from "../components/forms/FormInputText";
+import FormInputTextLong from "../components/forms/FormInputTextLong";
+import FormInputDropdown from "../components/forms/FormInputDropdown";
+import { useForm } from "react-hook-form";
 
 function UpdateResource() {
-  const [resourceName, setResourceName] = useState("");
-  const [resourceDescription, setResourceDescription] = useState("");
-  const [subject, setSubject] = useState("");
-  const [price, setPrice] = useState(0);
+  const { handleSubmit, reset, control, setValue } = useForm({
+    defaultValues: {},
+  });
+
+  function onSubmit(data) {
+    // console.log(user);
+    console.log(data);
+    // console.log(subjects);
+    // let tempSubject = subjects.filter(
+    //   (subject) => subject.id === data.subject_id
+    // );
+    // data.subject = tempSubject[0].name;
+    // data.author = "John Smith";
+    // createResource(data);
+  }
+
+  function onError(errors) {
+    console.log(errors);
+  }
 
   return (
-    <div>
-      <Navbar />
-      <form>
-        <div>
-          <label htmlFor="resourceName">Resource Name</label>
-          <input
-            type="text"
-            id="resourceName"
-            onChange={(e) => setResourceName(e.target.value)}
-            value={resourceName}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="resourceDescription">Resource Description</label>
-          <input
-            type="text"
-            id="resourceDescription"
-            onChange={(e) => setResourceDescription(e.target.value)}
-            value={resourceDescription}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="subject">Subject</label>
-          <select
-            id="subject"
-            onChange={(e) => setSubject(e.target.value)}
-            value={subject}
-          >
-            <option selected>Select a subject</option>
-          </select>
-        </div>
-        <div>
-          <label>Price</label>
-          <input
-            type="number"
-            id="price"
-            onChange={(e) => setPrice(e.target.value)}
-            value={price}
-          ></input>
-        </div>
-        <div>
-          <Button>Create Resource</Button>
-        </div>
-      </form>
-      <Footer />
-    </div>
+    <>
+      <h2>Update Resource</h2>
+      <Form>
+        <FormInputText
+          name={"name"}
+          control={control}
+          label={"Resource Name"}
+        />
+        <FormInputTextLong
+          name={"description"}
+          control={control}
+          label={"Resource Description"}
+        />
+        <FormInputDropdown
+          name="subject_id"
+          control={control}
+          label="Subject"
+          type="subjects"
+        />
+
+        <FormInputDropdown
+          name="file_type"
+          control={control}
+          label="File Type"
+          type="filetypes"
+        />
+
+        <FormInputText name={"price"} control={control} label={"Price"} />
+        <Button onClick={handleSubmit(onSubmit)}>Update Resource</Button>
+      </Form>
+    </>
   );
 }
 

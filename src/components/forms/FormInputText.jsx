@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-function FormInputText({ name, control, label }) {
+function FormInputText({ name, control, label, type }) {
   return (
     <Controller
       name={name}
@@ -20,6 +20,7 @@ function FormInputText({ name, control, label }) {
           fullWidth
           label={label}
           variant="outlined"
+          type={type}
         />
       )}
     />

@@ -44,7 +44,10 @@ function Navbar() {
           </Grid>
           <Grid item sm="auto">
             {!isAuthenticated ? (
-              <StyledNavLink to="/login">Log in</StyledNavLink>
+              <UserCorner>
+                <StyledNavLink to="/signup">Sign Up</StyledNavLink>
+                <StyledNavLink to="/login">Log in</StyledNavLink>
+              </UserCorner>
             ) : (
               <UserCorner>
                 <StyledNavLink to="/profile">Profile</StyledNavLink>

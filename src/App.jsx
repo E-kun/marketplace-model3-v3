@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./pages/AppLayout";
 import UserOnlyPages from "./pages/UserOnlyPages";
 import Profile from "./pages/Profile";
+import SignUp from "./pages/SignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function App() {
               <Route path="createResource" element={<CreateResource />} />
               <Route path="updateResource" element={<UpdateResource />} />
             </Route>
+            <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
