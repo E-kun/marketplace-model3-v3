@@ -38,7 +38,9 @@ function Navbar() {
           <Grid item sm={12} container>
             <Grid item sm={12} container direction="row">
               <StyledNavLink to="/catalogue">Catalogue</StyledNavLink>
-              {!isAuthenticated ? null : (
+              {!isAuthenticated ? (
+                <div></div>
+              ) : (
                 <StyledNavLink to="/createResource">
                   Create Resource
                 </StyledNavLink>
