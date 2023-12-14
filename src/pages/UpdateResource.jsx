@@ -1,14 +1,28 @@
-import { useState } from "react";
-
-import Button from "../components/CustomButton";
+import CustomButton from "../components/CustomButton";
 
 import Form from "../components/forms/Form";
 import FormInputText from "../components/forms/FormInputText";
 import FormInputTextLong from "../components/forms/FormInputTextLong";
 import FormInputDropdown from "../components/forms/FormInputDropdown";
 import { useForm } from "react-hook-form";
+import { useResources } from "../features/resources/useResources";
+import { useNavigate, useParams } from "react-router";
+import { useFilter } from "../features/resources/useFilter";
+import { useUserSession } from "../features/users/useUserSession";
+import { useUpdateResource } from "../features/resources/useUpdateResource";
 
 function UpdateResource() {
+  const { resourceId } = useParams();
+  const { user } = useUserSession();
+  // const { resources } = useResources();
+  const { subjects } = useFilter();
+  // const navigate = useNavigate();
+  const { isUpdating, updateResource } = useUpdateResource();
+
+  // let filteredResource = resources.filter(
+  //   (resource) => resource.id === resourceId
+  // );
+
   const { handleSubmit, reset, control, setValue } = useForm({
     defaultValues: {},
   });
@@ -17,12 +31,22 @@ function UpdateResource() {
     // console.log(user);
     console.log(data);
     // console.log(subjects);
-    // let tempSubject = subjects.filter(
-    //   (subject) => subject.id === data.subject_id
-    // );
-    // data.subject = tempSubject[0].name;
-    // data.author = "John Smith";
-    // createResource(data);
+    let tempSubject = subjects.filter(
+      (subject) => subject.id === data.subject_id
+    );
+    data.subject = tempSubject[0].name;
+    data.author =
+      user.user_metadata.firstName + " " + user.user_metadata.lastName;
+
+    console.log(data, resourceId);
+    updateResource(
+      { newResourceData: data, id: resourceId },
+      {
+        onSuccess: (data) => {
+          reset();
+        },
+      }
+    );
   }
 
   function onError(errors) {
@@ -58,10 +82,13 @@ function UpdateResource() {
         />
 
         <FormInputText name={"price"} control={control} label={"Price"} />
-        <Button onClick={handleSubmit(onSubmit)}>Update Resource</Button>
+        <CustomButton handleClick={handleSubmit(onSubmit)}>
+          Update Resource
+        </CustomButton>
       </Form>
     </>
   );
 }
+// children, handleClick, variant, color
 
 export default UpdateResource;

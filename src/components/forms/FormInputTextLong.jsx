@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-function FormInputText({ name, control, label }) {
+function FormInputTextLong({ name, control, label }) {
   return (
     <Controller
       name={name}
@@ -9,7 +9,7 @@ function FormInputText({ name, control, label }) {
       render={({
         field: { onChange, value },
         fieldState: { error },
-        formState,
+        // formState,
       }) => (
         <TextField
           helperText={error ? error.message : null}
@@ -19,6 +19,7 @@ function FormInputText({ name, control, label }) {
           value={value}
           fullWidth
           multiline
+          rows={5}
           label={label}
           variant="outlined"
         />
@@ -27,4 +28,4 @@ function FormInputText({ name, control, label }) {
   );
 }
 
-export default FormInputText;
+export default FormInputTextLong;

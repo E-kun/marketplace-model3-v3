@@ -9,7 +9,7 @@ function FormInputText({ name, control, label, type }) {
       render={({
         field: { onChange, value },
         fieldState: { error },
-        formState,
+        // formState,
       }) => (
         <TextField
           helperText={error ? error.message : null}

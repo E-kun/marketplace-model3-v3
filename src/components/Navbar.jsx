@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import Logout from "./Logout";
 import { useUserSession } from "../features/users/useUserSession";
 import PersonIcon from "@mui/icons-material/Person";
+import { Feedback } from "@mui/icons-material";
 
 const StyledNavLink = styled(NavLink)`
   padding: 1.2rem 4.8rem;
@@ -37,9 +38,11 @@ function Navbar() {
           <Grid item sm={12} container>
             <Grid item sm={12} container direction="row">
               <StyledNavLink to="/catalogue">Catalogue</StyledNavLink>
-              <StyledNavLink to="/createResource">
-                Create Resource
-              </StyledNavLink>
+              {!isAuthenticated ? null : (
+                <StyledNavLink to="/createResource">
+                  Create Resource
+                </StyledNavLink>
+              )}
             </Grid>
           </Grid>
           <Grid item sm="auto">
@@ -50,6 +53,9 @@ function Navbar() {
               </UserCorner>
             ) : (
               <UserCorner>
+                <StyledNavLink to="/provideFeedback">
+                  <Feedback />
+                </StyledNavLink>
                 <StyledNavLink to="/profile">Profile</StyledNavLink>
                 {/* <IconButton>
                   <PersonIcon fontSize="large" />

@@ -16,6 +16,8 @@ import AppLayout from "./pages/AppLayout";
 import UserOnlyPages from "./pages/UserOnlyPages";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
+import ProvideFeedback from "./pages/ProvideFeedback";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,9 +45,13 @@ function App() {
                 </ProtectedRoute>
               }
             >
+              <Route path="provideFeedback" element={<ProvideFeedback />} />
               <Route path="profile" element={<Profile />} />
               <Route path="createResource" element={<CreateResource />} />
-              <Route path="updateResource" element={<UpdateResource />} />
+              <Route
+                path="updateResource/:resourceId"
+                element={<UpdateResource />}
+              />
             </Route>
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
@@ -53,6 +59,27 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "white",
+            color: "var(--color-grey-700)",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

@@ -68,33 +68,4 @@ function ResourceItem({ resource }) {
   );
 }
 
-// function ResourceItem({ resource }) {
-//   const { name, price, subject, description, id } = resource;
-
-//   return (
-//     <StyledResourceItem>
-//       <StyledResourceLink to={`${id}`}>
-//         <Grid container spacing={3}>
-//           <Grid xs>
-//             <StyledResourceImage
-//               src="/pexels-anni-roenkae-2156881.jpg"
-//               alt="resource thumbnail"
-//             />
-//           </Grid>
-//           <Grid xs={6}>
-//             <ResourceDetails>
-//               <StyledResourceName>{name}</StyledResourceName>
-//               <h4>{subject}</h4>
-//               <p>{description}</p>
-//             </ResourceDetails>
-//           </Grid>
-//           <Grid xs>
-//             <h4>RM{price}</h4>
-//           </Grid>
-//         </Grid>
-//       </StyledResourceLink>
-//     </StyledResourceItem>
-//   );
-// }
-
 export default ResourceItem;

@@ -1,11 +1,9 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-import { subjects, subjectCodes } from "../../data/subjects";
+import { subjects } from "../../data/subjects";
 import { filetypes } from "../../data/filetypes";
 import { levels } from "../../data/levels";
-
-import styled from "@emotion/styled";
 
 function FormInputDropdown({ name, control, label, type }) {
   let options = [];

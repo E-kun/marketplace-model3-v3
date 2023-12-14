@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createResourceApi } from "../../services/apiResources";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 export function useCreateResource() {
   const navigate = useNavigate();
@@ -9,10 +10,11 @@ export function useCreateResource() {
   const { mutate: createResource, isLoading: isCreating } = useMutation({
     mutationFn: createResourceApi,
     onSuccess: () => {
+      toast.success("New resource successfully created");
       queryClient.invalidateQueries({ queryKey: ["resources"] });
       navigate("/catalogue", { replace: true });
     },
-    onError: (err) => console.log(err.message),
+    onError: (err) => toast.log(err.message),
   });
 
   return { isCreating, createResource };

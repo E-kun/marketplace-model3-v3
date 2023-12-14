@@ -16,7 +16,7 @@ const ProfileBox = styled(Paper)`
 
 function Profile() {
   const { user } = useUserSession();
-  console.log(user);
+  // console.log(user);
 
   return (
     <ProfileBox>

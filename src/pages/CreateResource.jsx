@@ -40,9 +40,14 @@ function CreateResource() {
       (subject) => subject.id === data.subject_id
     );
     data.subject = tempSubject[0].name;
-    data.author = "John Smith";
+    data.author =
+      user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
-    createResource(data);
+    createResource(data, {
+      onSuccess: (data) => {
+        reset();
+      },
+    });
   }
 
   function onError(errors) {

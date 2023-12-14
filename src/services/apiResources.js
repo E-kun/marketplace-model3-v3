@@ -22,11 +22,28 @@ export async function createResourceApi(newResource) {
   // let query = supabase.from("resources");
   // query = query.insert(newResource);
   //   if (!id) query = query.insert([{ ...newResource }]);
-  const { error } = await supabase.from("resources").insert(newResource);
+  const { data, error } = await supabase.from("resources").insert(newResource);
   if (error) {
     console.error(error);
     throw new Error("Resource could not be created");
   }
+
+  return data;
+}
+
+export async function updateResourceApi(updatedResource, id) {
+  console.log(updatedResource, id);
+  const { data, error } = await supabase
+    .from("resources")
+    .update(updatedResource)
+    .eq("id", id);
+  // .select().single();
+  if (error) {
+    console.error(error);
+    throw new Error("Resource could not be updated");
+  }
+
+  return data;
 }
 
 export async function deleteResource(id) {
