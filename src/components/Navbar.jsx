@@ -4,14 +4,11 @@ import AppBar from "@mui/material/AppBar";
 import { CircularProgress, Container, Grid, Toolbar } from "@mui/material";
 
 import Logo from "./Logo";
-// import Logout from "./Logout";
 import { useUserSession } from "../features/users/useUserSession";
 import { Feedback } from "@mui/icons-material";
 
-// import { useGetUsersObserver } from "../features/users/useGetUsersObserver";
 import { useLogout } from "../features/users/useLogout";
 import CustomButton from "./CustomButton";
-import { useState } from "react";
 
 const StyledNavLink = styled(NavLink)`
   padding: 1.2rem 4.8rem;
