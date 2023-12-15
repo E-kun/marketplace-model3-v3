@@ -58,6 +58,8 @@ function Resource() {
     (resource) => resource.id === resourceId
   );
 
+  console.log(user);
+
   const {
     id,
     created_at,
@@ -114,26 +116,28 @@ function Resource() {
           </div>
         </ResourceDetails>
       </ResourceListing>
-      {isAuthenticated && (
-        <>
-          <CustomButton
-            disabled={isDeleting}
-            handleClick={handleEditButton}
-            variant="contained"
-            color="primary"
-          >
-            Update Resource
-          </CustomButton>
-          <CustomButton
-            disabled={isDeleting}
-            handleClick={() => deleteResource(resourceId)}
-            variant="contained"
-            color="error"
-          >
-            Delete Resource
-          </CustomButton>
-        </>
-      )}
+      {isAuthenticated &&
+        user.user_metadata.firstName + " " + user.user_metadata.lastName ===
+          author && (
+          <>
+            <CustomButton
+              disabled={isDeleting}
+              handleClick={handleEditButton}
+              variant="contained"
+              color="primary"
+            >
+              Update Resource
+            </CustomButton>
+            <CustomButton
+              disabled={isDeleting}
+              handleClick={() => deleteResource(resourceId)}
+              variant="contained"
+              color="error"
+            >
+              Delete Resource
+            </CustomButton>
+          </>
+        )}
       <ResourceGallery>
         {imageList.map((image) => (
           <li
