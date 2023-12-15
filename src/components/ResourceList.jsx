@@ -21,7 +21,7 @@ function ResourceList() {
   const [searchParams] = useSearchParams();
 
   const filterValue = searchParams.toString().split("&") || "all";
-  console.log(filterValue);
+  // console.log(filterValue);
   // console.log(subjects);
   // console.log(resources);
 

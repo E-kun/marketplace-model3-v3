@@ -7,7 +7,6 @@ import { useDeleteResource } from "../features/resources/useDeleteResource";
 import { Paper } from "@mui/material";
 import CustomButton from "./CustomButton";
 import { useUserSession } from "../features/users/useUserSession";
-import { Link } from "react-router-dom";
 
 const ResourceListing = styled(Paper)`
   margin: 2em auto;

@@ -1,13 +1,17 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
 import AppBar from "@mui/material/AppBar";
-import { Container, Grid, IconButton, Toolbar } from "@mui/material";
+import { CircularProgress, Container, Grid, Toolbar } from "@mui/material";
 
 import Logo from "./Logo";
-import Logout from "./Logout";
+// import Logout from "./Logout";
 import { useUserSession } from "../features/users/useUserSession";
-import PersonIcon from "@mui/icons-material/Person";
 import { Feedback } from "@mui/icons-material";
+
+// import { useGetUsersObserver } from "../features/users/useGetUsersObserver";
+import { useLogout } from "../features/users/useLogout";
+import CustomButton from "./CustomButton";
+import { useState } from "react";
 
 const StyledNavLink = styled(NavLink)`
   padding: 1.2rem 4.8rem;
@@ -26,7 +30,12 @@ const UserCorner = styled(Grid)`
 `;
 
 function Navbar() {
+  const { logout, isLoading } = useLogout();
   const { isAuthenticated } = useUserSession();
+
+  function handleLogout() {
+    logout();
+  }
 
   return (
     <AppBar position="static">
@@ -63,7 +72,14 @@ function Navbar() {
                   <PersonIcon fontSize="large" />
                   
                 </IconButton> */}
-                <Logout />
+                <CustomButton
+                  disabled={isLoading}
+                  handleClick={handleLogout}
+                  variant="contained"
+                  color="secondary"
+                >
+                  {!isLoading ? "Log out" : <CircularProgress />}
+                </CustomButton>
               </UserCorner>
             )}
           </Grid>
