@@ -34,6 +34,8 @@ function FormInputDropdown({ name, control, label, type }) {
             label={label}
             onChange={onChange}
             value={value}
+            displayEmpty
+            defaultValue=""
           >
             {options.map((option) => (
               <MenuItem value={option.id} key={option.id}>

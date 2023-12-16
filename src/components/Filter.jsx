@@ -49,11 +49,11 @@ function Filter() {
     //   ["file_type", value.file_type],
     // ]);
 
-    setSearchParams({
-      subject_id: value.subject_id,
-      level: value.level,
-      file_type: value.file_type,
-    });
+    // setSearchParams({
+    //   subject_id: value.subject_id,
+    //   level: value.level,
+    //   file_type: value.file_type,
+    // });
     // reset();
   }
 
