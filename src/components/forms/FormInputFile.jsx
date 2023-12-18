@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-function FormInputText({ name, control, label, type }) {
+function FormInputFile({ name, control, label, accept }) {
   return (
     <Controller
       name={name}
@@ -12,18 +12,18 @@ function FormInputText({ name, control, label, type }) {
         // formState,
       }) => (
         <TextField
-          helperText={error ? error.message : null}
           size="small"
           error={!!error}
           onChange={onChange}
           value={value}
           label={label}
           variant="outlined"
-          type={type}
+          type="file"
+          accept={accept}
         />
       )}
     />
   );
 }
 
-export default FormInputText;
+export default FormInputFile;

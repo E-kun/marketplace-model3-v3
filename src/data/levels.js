@@ -28,19 +28,19 @@ export const levels = [
     name: "Form 2",
   },
   {
-    id: "form1",
+    id: "form3",
     name: "Form 3",
   },
   {
-    id: "form1",
+    id: "form4",
     name: "Form 4",
   },
   {
-    id: "form1",
+    id: "form5",
     name: "Form 5",
   },
   {
-    id: "form1",
+    id: "form6",
     name: "Form 6",
   },
   {

@@ -68,6 +68,7 @@ function Resource() {
     subject,
     file_type: type,
     author,
+    image,
   } = filteredResource[0];
 
   // console.log(filteredResource[0]);
@@ -79,10 +80,7 @@ function Resource() {
   return (
     <>
       <ResourceListing>
-        <ResourceImageThumbnail
-          src="/pexels-anni-roenkae-2156881.jpg"
-          alt="Resource Image"
-        />
+        <ResourceImageThumbnail src={image} alt="Resource Image" />
         <ResourceDetails>
           <div>
             {/* <h2>Test Resource</h2> */}

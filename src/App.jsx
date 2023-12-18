@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import ProvideFeedback from "./pages/ProvideFeedback";
 import { Toaster } from "react-hot-toast";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ function App() {
                 path="updateResource/:resourceId"
                 element={<UpdateResource />}
               />
+              <Route path="admin" element={<Admin />} />
             </Route>
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
