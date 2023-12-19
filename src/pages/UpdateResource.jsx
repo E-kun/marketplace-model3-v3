@@ -153,8 +153,12 @@ function UpdateResource() {
           />
         </FormRow>
         <FormRow>
-          <button type="reset">Cancel</button>
-          <button disabled={isUpdating}>Create Resource</button>
+          <CustomButton type="reset" color="error">
+            Cancel
+          </CustomButton>
+          <CustomButton disabled={isUpdating} color="primary">
+            Update Resource
+          </CustomButton>
         </FormRow>
       </form>
     </>
