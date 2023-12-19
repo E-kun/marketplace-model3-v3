@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 
-function CustomButton({ children, handleClick, variant, color }) {
-  const StyledButton = styled(Button)`
-    margin: 0 10px;
-  `;
+const StyledButton = styled(Button)`
+  margin: 0 10px;
+`;
 
+function CustomButton({ children, onClick, variant, color, type }) {
   return (
-    <StyledButton variant={variant} onClick={handleClick} color={color}>
+    <StyledButton variant={variant} onClick={onClick} color={color} type={type}>
       {children}
     </StyledButton>
   );

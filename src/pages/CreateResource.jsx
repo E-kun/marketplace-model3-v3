@@ -140,8 +140,12 @@ function CreateResource() {
           />
         </FormRow>
         <FormRow>
-          <button type="reset">Cancel</button>
-          <button disabled={isWorking}>Create Resource</button>
+          <CustomButton type="reset" color="error">
+            Cancel
+          </CustomButton>
+          <CustomButton disabled={isWorking} color="primary">
+            Create Resource
+          </CustomButton>
         </FormRow>
       </form>
     </>
