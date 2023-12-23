@@ -4,6 +4,7 @@ import { Controller } from "react-hook-form";
 import { subjects } from "../../data/subjects";
 import { filetypes } from "../../data/filetypes";
 import { levels } from "../../data/levels";
+import { priceRanges } from "../../data/priceRanges";
 
 function FormInputDropdown({ name, control, label, type }) {
   let options = [];
@@ -21,6 +22,11 @@ function FormInputDropdown({ name, control, label, type }) {
   if (type === "levels") {
     options = levels;
     inputId = "level";
+  }
+
+  if (type === "price_range") {
+    options = priceRanges;
+    inputId = "price_range";
   }
 
   return (

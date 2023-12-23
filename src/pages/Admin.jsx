@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { S3Client } from "@aws-sdk/client-s3";
 
 import CustomButton from "../components/CustomButton";
-import Form from "../components/forms/Form";
+
 import { useForm } from "react-hook-form";
 import FormInputFile from "../components/forms/FormInputFile";
 import { useUploadFile } from "../features/resources/useUploadFile";
@@ -42,23 +42,7 @@ function Admin() {
 
   return (
     <BoxBackground>
-      <div>
-        <Form>
-          <FileInputAlt
-            id="image"
-            accept="image/*"
-            type="file"
-            {...register("image")}
-          />
-
-          <CustomButton
-            color="primary"
-            handleClick={handleSubmit(onSubmit, onError)}
-          >
-            File Upload Test
-          </CustomButton>
-        </Form>
-      </div>
+      <div></div>
     </BoxBackground>
   );
 }

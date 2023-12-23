@@ -1,15 +1,12 @@
-import CustomButton from "../components/CustomButton";
-
-import Form from "../components/forms/Form";
-import FormInputText from "../components/forms/FormInputText";
-import FormInputTextLong from "../components/forms/FormInputTextLong";
-import FormInputDropdown from "../components/forms/FormInputDropdown";
 import { useForm } from "react-hook-form";
-import { useResources } from "../features/resources/useResources";
-import { useNavigate, useParams } from "react-router";
-import { useFilter } from "../features/resources/useFilter";
+import { useParams } from "react-router";
+
 import { useUserSession } from "../features/users/useUserSession";
 import { useUpdateResource } from "../features/resources/useUpdateResource";
+
+import CustomButton from "../components/CustomButton";
+import FormInputText from "../components/forms/FormInputText";
+import FormInputTextLong from "../components/forms/FormInputTextLong";
 import FormRow from "../components/forms/FormRow";
 
 import { subjects } from "../data/subjects";
@@ -28,10 +25,9 @@ function UpdateResource() {
   //   (resource) => resource.id === resourceId
   // );
 
-  const { handleSubmit, reset, control, setValue, register, formState } =
-    useForm({
-      defaultValues: {},
-    });
+  const { handleSubmit, reset, register, formState } = useForm({
+    defaultValues: {},
+  });
 
   const { errors } = formState;
 
@@ -70,7 +66,7 @@ function UpdateResource() {
 
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <FormRow label="Resource Name" error={errors?.name?.message}>
-          <input
+          <FormInputText
             type="text"
             id="name"
             disabled={isUpdating}
@@ -81,11 +77,12 @@ function UpdateResource() {
           label="Resource Description"
           error={errors?.description?.message}
         >
-          <textarea
+          <FormInputTextLong
             type="text"
             id="description"
             disabled={isUpdating}
             {...register("description")}
+            rows={15}
           />
         </FormRow>
         <FormRow label="Subject" error={errors?.subject?.message}>
@@ -117,7 +114,7 @@ function UpdateResource() {
         </FormRow>
 
         <FormRow label="Resource Price" error={errors?.price?.message}>
-          <input
+          <FormInputText
             type="number"
             id="price"
             disabled={isUpdating}
@@ -153,12 +150,8 @@ function UpdateResource() {
           />
         </FormRow>
         <FormRow>
-          <CustomButton type="reset" color="error">
-            Cancel
-          </CustomButton>
-          <CustomButton disabled={isUpdating} color="primary">
-            Update Resource
-          </CustomButton>
+          <button type="reset">Cancel</button>
+          <button disabled={isUpdating}>Update Resource</button>
         </FormRow>
       </form>
     </>

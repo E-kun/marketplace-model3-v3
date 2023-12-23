@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Filter from "../components/Filter";
 import ResourceList from "../components/ResourceList";
 
@@ -10,10 +11,27 @@ const CatalogueLayout = styled.div`
 `;
 
 function Catalogue() {
+  const [selectedPrice, setSelectedPrice] = useState();
+  const [selectedSubject, setSelectedSubject] = useState();
+  const [selectedLevel, setSelectedLevel] = useState();
+  const [selectedFileType, setSelectedFileType] = useState();
+
   return (
     <CatalogueLayout>
-      <Filter />
-      <ResourceList />
+      <Filter
+        setSelectedPrice={setSelectedPrice}
+        setSelectedLevel={setSelectedLevel}
+        setSelectedSubject={setSelectedSubject}
+        setSelectedType={setSelectedFileType}
+      />
+      <ResourceList
+        filterValues={[
+          selectedPrice,
+          selectedSubject,
+          selectedLevel,
+          selectedFileType,
+        ]}
+      />
     </CatalogueLayout>
   );
 }

@@ -119,7 +119,7 @@ function Resource() {
           <>
             <CustomButton
               disabled={isDeleting}
-              handleClick={handleEditButton}
+              onClick={handleEditButton}
               variant="contained"
               color="primary"
             >
@@ -127,7 +127,7 @@ function Resource() {
             </CustomButton>
             <CustomButton
               disabled={isDeleting}
-              handleClick={() => deleteResource(resourceId)}
+              onClick={() => deleteResource(resourceId)}
               variant="contained"
               color="error"
             >

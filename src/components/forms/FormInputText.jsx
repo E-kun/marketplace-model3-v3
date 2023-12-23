@@ -1,29 +1,15 @@
-import { TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
+import styled from "@emotion/styled";
 
-function FormInputText({ name, control, label, type }) {
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, value },
-        fieldState: { error },
-        // formState,
-      }) => (
-        <TextField
-          helperText={error ? error.message : null}
-          size="small"
-          error={!!error}
-          onChange={onChange}
-          value={value}
-          label={label}
-          variant="outlined"
-          type={type}
-        />
-      )}
-    />
-  );
-}
+const FormInputText = styled.input`
+  color: #333;
+  margin: 0 auto;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 90%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+`;
 
 export default FormInputText;

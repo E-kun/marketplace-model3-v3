@@ -3,7 +3,6 @@ import { Button, FormControl, FormGroup } from "@mui/material";
 
 import FormInputDropdown from "./forms/FormInputDropdown";
 import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router-dom";
 
 const StyledFilterWindow = styled.div`
   max-width: 200px;
@@ -14,47 +13,38 @@ const StyledFilterWindow = styled.div`
   box-shadow: -5px 5px 5px #6ea179;
 `;
 
-const StyledFormControl = styled(FormControl)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
-
-const StyledFormGroup = styled(FormGroup)`
-  display: flex;
-  flex-direction: column;
-  padding: 0 2em;
-  margin: 1em;
-  background-color: #dadacd;
-  justify-content: flex-start;
-`;
-
-const StyledFilterGroupTitle = styled.h4`
-  margin: 0 auto;
-`;
-
-function Filter() {
-  const [searchParams, setSearchParams] = useSearchParams({});
-  // const currentFilter = searchParams.get(filterField) || options.at(0).value;
-
-  const { handleSubmit, reset, control, resetField } = useForm({
-    defaultValues: {},
+function Filter({
+  setSelectedPrice,
+  setSelectedSubject,
+  setSelectedType,
+  setSelectedLevel,
+}) {
+  const { handleSubmit, control, resetField } = useForm({
+    defaultValues: {
+      subject_id: "",
+      level: "",
+      file_type: "",
+      price_range: "",
+    },
   });
 
-  function onSubmit(value) {
-    console.log(value);
-    // searchParams.set([
-    //   ["subject", value.subject],
-    //   ["level", value.level],
-    //   ["file_type", value.file_type],
-    // ]);
+  function onSubmit(data) {
+    // console.log(data);
+    setSelectedPrice(data.price_range);
+    setSelectedSubject(data.subject_id);
+    setSelectedType(data.file_type);
+    setSelectedLevel(data.level);
+  }
 
-    // setSearchParams({
-    //   subject_id: value.subject_id,
-    //   level: value.level,
-    //   file_type: value.file_type,
-    // });
-    // reset();
+  function reset() {
+    resetField("subject_id");
+    resetField("level");
+    resetField("file_type");
+    resetField("price_range");
+    setSelectedPrice();
+    setSelectedSubject();
+    setSelectedType();
+    setSelectedLevel();
   }
 
   return (
@@ -79,6 +69,17 @@ function Filter() {
         label="File Type"
         type="filetypes"
       />
+
+      <FormInputDropdown
+        name="price_range"
+        control={control}
+        label="Price Range"
+        type="price_range"
+      />
+
+      <Button variant="contained" onClick={reset}>
+        Reset
+      </Button>
 
       <Button variant="contained" onClick={handleSubmit(onSubmit)}>
         Filter

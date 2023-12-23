@@ -1,28 +1,28 @@
-import styled from "@emotion/styled";
-import { Button, FormControl, MenuItem } from "@mui/material";
 import { useForm } from "react-hook-form";
 
 import { useCreateResource } from "../features/resources/useCreateResource";
 import { useUserSession } from "../features/users/useUserSession";
 import { useFilter } from "../features/resources/useFilter";
+
 import FormRow from "../components/forms/FormRow";
+import CustomButton from "../components/CustomButton";
+import FormInputText from "../components/forms/FormInputText";
+import FormInputTextLong from "../components/forms/FormInputTextLong";
 
 import { subjects } from "../data/subjects";
 import { filetypes } from "../data/filetypes";
 import { levels } from "../data/levels";
-import CustomButton from "../components/CustomButton";
 
 function CreateResource() {
   const { isCreating, createResource } = useCreateResource();
-  const { isAuthenticated, user } = useUserSession();
+  const { user } = useUserSession();
   // const { subjects } = useFilter();
 
   const isWorking = isCreating;
 
-  const { handleSubmit, reset, control, setValue, register, formState } =
-    useForm({
-      defaultValues: {},
-    });
+  const { handleSubmit, reset, register, formState } = useForm({
+    defaultValues: {},
+  });
 
   const { errors } = formState;
 
@@ -37,14 +37,15 @@ function CreateResource() {
     data.author =
       user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
-    createResource(
-      { ...data, image: image, file: file },
-      {
-        onSuccess: (data) => {
-          reset();
-        },
-      }
-    );
+    console.log(data);
+    // createResource(
+    //   { ...data, image: image, file: file },
+    //   {
+    //     onSuccess: (data) => {
+    //       reset();
+    //     },
+    //   }
+    // );
   }
 
   function onError(errors) {
@@ -57,7 +58,7 @@ function CreateResource() {
 
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <FormRow label="Resource Name" error={errors?.name?.message}>
-          <input
+          <FormInputText
             type="text"
             id="name"
             disabled={isWorking}
@@ -68,11 +69,12 @@ function CreateResource() {
           label="Resource Description"
           error={errors?.description?.message}
         >
-          <textarea
+          <FormInputTextLong
             type="text"
             id="description"
             disabled={isWorking}
             {...register("description")}
+            rows={15}
           />
         </FormRow>
         <FormRow label="Subject" error={errors?.subject?.message}>
@@ -104,7 +106,7 @@ function CreateResource() {
         </FormRow>
 
         <FormRow label="Resource Price" error={errors?.price?.message}>
-          <input
+          <FormInputText
             type="number"
             id="price"
             disabled={isWorking}
@@ -125,6 +127,7 @@ function CreateResource() {
             id="file"
             disabled={isWorking}
             {...register("file")}
+            multiple
           />
         </FormRow>
         <FormRow
@@ -140,12 +143,12 @@ function CreateResource() {
           />
         </FormRow>
         <FormRow>
-          <CustomButton type="reset" color="error">
+          <button type="reset" color="error">
             Cancel
-          </CustomButton>
-          <CustomButton disabled={isWorking} color="primary">
+          </button>
+          <button disabled={isWorking} color="primary">
             Create Resource
-          </CustomButton>
+          </button>
         </FormRow>
       </form>
     </>
