@@ -11,7 +11,6 @@ import {
   Select,
   Toolbar,
 } from "@mui/material";
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 import Logo from "./Logo";
 import { useUserSession } from "../features/users/useUserSession";
@@ -59,7 +58,6 @@ function Navbar() {
           <Select defaultValue="malaysia">
             <MenuItem value="malaysia">
               <FlagIcon src="/MY-Malaysia-Flag-icon.png" />
-              
             </MenuItem>
             <MenuItem value="brunei">
               <FlagIcon src="/brunei-flag-icon.png" />

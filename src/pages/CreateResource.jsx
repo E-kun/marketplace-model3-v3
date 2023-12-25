@@ -12,24 +12,24 @@ import FormInputTextLong from "../components/forms/FormInputTextLong";
 import { subjects } from "../data/subjects";
 import { filetypes } from "../data/filetypes";
 import { levels } from "../data/levels";
+import { DropzoneField } from "../components/DropzoneField";
+import { useState } from "react";
 
 function CreateResource() {
+  const { handleSubmit, reset, register, formState, control } = useForm({
+    defaultValues: {},
+  });
+  const [files, setFiles] = useState([]);
+  const [images, setImages] = useState([]);
   const { isCreating, createResource } = useCreateResource();
   const { user } = useUserSession();
   // const { subjects } = useFilter();
 
   const isWorking = isCreating;
 
-  const { handleSubmit, reset, register, formState } = useForm({
-    defaultValues: {},
-  });
-
   const { errors } = formState;
 
   function onSubmit(data) {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
-    const file = typeof data.file === "string" ? data.file : data.file[0];
-
     let tempSubject = subjects.filter(
       (subject) => subject.id === data.subject_id
     );
@@ -37,15 +37,14 @@ function CreateResource() {
     data.author =
       user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
-    console.log(data);
-    // createResource(
-    //   { ...data, image: image, file: file },
-    //   {
-    //     onSuccess: (data) => {
-    //       reset();
-    //     },
-    //   }
-    // );
+    createResource(
+      { ...data, images: images, files: files },
+      {
+        onSuccess: (data) => {
+          reset();
+        },
+      }
+    );
   }
 
   function onError(errors) {
@@ -113,22 +112,15 @@ function CreateResource() {
             {...register("price")}
           />
         </FormRow>
-        <FormRow label="Resource Image" error={errors?.image?.message}>
-          <input
-            type="file"
-            id="image"
-            disabled={isWorking}
-            {...register("image")}
+        <FormRow label="Resource Image">
+          <DropzoneField
+            name="imageDropzone"
+            inputType="image"
+            setFiles={setImages}
           />
         </FormRow>
-        <FormRow label="Resource File" error={errors?.file?.message}>
-          <input
-            type="file"
-            id="file"
-            disabled={isWorking}
-            {...register("file")}
-            multiple
-          />
+        <FormRow label="Resource File">
+          <DropzoneField name="fileDropzone" setFiles={setFiles} />
         </FormRow>
         <FormRow
           label="I can confirm that this resource is of my own work and has not been plagiarised or stolen from another source."

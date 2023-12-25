@@ -28,6 +28,8 @@ function ResourceList({ filterValues }) {
     filteredType: "",
   };
 
+  // console.log(typeof resources[6].files);
+
   //Price, subject, level, type
   if (filterValues.some((value) => value !== "")) {
     filterValues.forEach((value, index) => {

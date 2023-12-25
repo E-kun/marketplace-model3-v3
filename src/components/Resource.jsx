@@ -7,6 +7,7 @@ import { useDeleteResource } from "../features/resources/useDeleteResource";
 import { Paper } from "@mui/material";
 import CustomButton from "./CustomButton";
 import { useUserSession } from "../features/users/useUserSession";
+import { Link } from "react-router-dom";
 
 const ResourceListing = styled(Paper)`
   margin: 2em auto;
@@ -57,7 +58,8 @@ function Resource() {
     (resource) => resource.id === resourceId
   );
 
-  console.log(user);
+  console.log(filteredResource);
+  // console.log(user);
 
   const {
     id,
@@ -68,7 +70,8 @@ function Resource() {
     subject,
     file_type: type,
     author,
-    image,
+    images,
+    files,
   } = filteredResource[0];
 
   // console.log(filteredResource[0]);
@@ -80,7 +83,7 @@ function Resource() {
   return (
     <>
       <ResourceListing>
-        <ResourceImageThumbnail src={image} alt="Resource Image" />
+        <ResourceImageThumbnail src={images[0]} alt="Resource Image" />
         <ResourceDetails>
           <div>
             {/* <h2>Test Resource</h2> */}
@@ -119,6 +122,14 @@ function Resource() {
           <>
             <CustomButton
               disabled={isDeleting}
+              onClick={() => {}}
+              variant="contained"
+              color="primary"
+            >
+              <Link to={files[0]}>Retrieve Resource Files</Link>
+            </CustomButton>
+            <CustomButton
+              disabled={isDeleting}
               onClick={handleEditButton}
               variant="contained"
               color="primary"
@@ -136,7 +147,7 @@ function Resource() {
           </>
         )}
       <ResourceGallery>
-        {imageList.map((image) => (
+        {images.map((image) => (
           <li
             key={image}
             className={css`
@@ -148,10 +159,7 @@ function Resource() {
               }
             `}
           >
-            <ResourceGalleryImage
-              src="/pexels-anni-roenkae-2156881.jpg"
-              alt={image}
-            />
+            <ResourceGalleryImage src={image} alt={image} />
           </li>
         ))}
       </ResourceGallery>

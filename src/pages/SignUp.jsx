@@ -73,12 +73,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-{
-  /* <CustomButton type="reset" color="error">
-Cancel
-</CustomButton>
-<CustomButton disabled={isLoading} color="primary">
-Sign Up
-</CustomButton> */
-}

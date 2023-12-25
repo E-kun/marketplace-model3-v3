@@ -5,7 +5,7 @@ import CustomButton from "../components/CustomButton";
 
 import { useForm } from "react-hook-form";
 import FormInputFile from "../components/forms/FormInputFile";
-import { useUploadFile } from "../features/resources/useUploadFile";
+
 import FileInputAlt from "../components/forms/FileInputAlt";
 
 const s3 = new S3Client({
@@ -26,14 +26,12 @@ const BoxBackground = styled.div`
 `;
 
 function Admin() {
-  const { isUploading, uploadFile } = useUploadFile();
   const { register, handleSubmit, reset, control, setValue } = useForm({
     defaultValues: {},
   });
 
   function onSubmit(data) {
     console.log(data);
-    uploadFile(data);
   }
 
   function onError(errors) {

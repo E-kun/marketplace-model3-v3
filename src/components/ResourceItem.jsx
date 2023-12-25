@@ -29,7 +29,7 @@ const StyledResourceImage = styled.img`
 `;
 
 function ResourceItem({ resource }) {
-  const { name, price, subject, description, id, image } = resource;
+  const { name, price, subject, description, id, images } = resource;
 
   return (
     <StyledResourceItem>
@@ -44,7 +44,7 @@ function ResourceItem({ resource }) {
         >
           <Grid container spacing={2}>
             <Grid item>
-              <StyledResourceImage src={image} alt="resource thumbnail" />
+              <StyledResourceImage src={images[0]} alt="resource thumbnail" />
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
