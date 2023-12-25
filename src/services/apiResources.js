@@ -150,9 +150,15 @@ export async function updateResourceApi(updatedResource, id) {
     throw new Error("Resource could not be updated");
   }
 
-  // if (hasImagePath && hasFilePath) return data;
+  const { error: filesDeletionError } = await supabase.storage
+    .from("files")
+    .remove(`${updatedResource.author}/${updatedResource.name}/*`);
+
+  const { error: imagesDeletionError } = await supabase.storage
+    .from("images")
+    .remove(`${updatedResource.author}/${updatedResource.name}/*`);
+
   fileNames.forEach(async (file, index) => {
-    // console.log(file, index, updatedResource.files[index]);
     const { error: fileStorageError } = await supabase.storage
       .from("files")
       .upload(
@@ -169,7 +175,6 @@ export async function updateResourceApi(updatedResource, id) {
   });
 
   imageNames.forEach(async (image, index) => {
-    // console.log(image, index, updatedResource.images[index]);
     const { error: imageStorageError } = await supabase.storage
       .from("images")
       .upload(
@@ -194,7 +199,16 @@ export async function deleteResource(id) {
     .delete()
     .eq("id", id);
 
+  // const { error: filesDeletionError } = await supabase.storage
+  //   .from("files")
+  //   .remove([`${updatedResource.author}/${updatedResource.name}`]);
+
+  // const { error: imagesDeletionError } = await supabase.storage
+  //   .from("images")
+  //   .remove([`${updatedResource.author}/${updatedResource.name}`]);
+
   if (error) {
+    // if (error || filesDeletionError || imagesDeletionError) {
     console.error(error);
     throw new Error("Resource could not be deleted");
   }
