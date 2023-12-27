@@ -13,7 +13,7 @@ export function useUpdateResource() {
     onSuccess: () => {
       toast.success("Resource updated");
       queryClient.invalidateQueries({ queryKey: ["resources"] });
-      // navigate("/catalogue", { replace: true });
+      navigate("/catalogue", { replace: true });
     },
     onError: (err) => toast.error(err.message),
   });

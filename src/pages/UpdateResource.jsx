@@ -53,7 +53,7 @@ function UpdateResource() {
       },
       {
         onSuccess: (data) => {
-          // reset();
+          reset();
         },
       }
     );
