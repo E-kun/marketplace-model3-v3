@@ -8,12 +8,12 @@ export function useUpdateResource() {
   const queryClient = useQueryClient();
 
   const { mutate: updateResource, isLoading: isUpdating } = useMutation({
-    mutationFn: ({ newResourceData, id }) =>
-      updateResourceApi(newResourceData, id),
+    mutationFn: ({ newResourceData, id, oldImages, oldFiles }) =>
+      updateResourceApi(newResourceData, id, oldImages, oldFiles),
     onSuccess: () => {
       toast.success("Resource updated");
       queryClient.invalidateQueries({ queryKey: ["resources"] });
-      navigate("/catalogue", { replace: true });
+      // navigate("/catalogue", { replace: true });
     },
     onError: (err) => toast.error(err.message),
   });

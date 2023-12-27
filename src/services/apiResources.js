@@ -105,7 +105,12 @@ export async function createResourceApi(newResource) {
   return data;
 }
 
-export async function updateResourceApi(updatedResource, id) {
+export async function updateResourceApi(
+  updatedResource,
+  id,
+  oldImages,
+  oldFiles
+) {
   const filePaths = [];
   const imagePaths = [];
   const fileNames = [];
@@ -150,13 +155,25 @@ export async function updateResourceApi(updatedResource, id) {
     throw new Error("Resource could not be updated");
   }
 
-  const { error: filesDeletionError } = await supabase.storage
-    .from("files")
-    .remove(`${updatedResource.author}/${updatedResource.name}/*`);
+  oldFiles.forEach(async (file) => {
+    // console.log(file.split("files/")[1]);
+    const { error: filesDeletionError } = await supabase.storage
+      .from("files")
+      .remove(file.split("files/")[1]);
+    if (filesDeletionError) {
+      throw new Error("Unable to delete old files");
+    }
+  });
 
-  const { error: imagesDeletionError } = await supabase.storage
-    .from("images")
-    .remove(`${updatedResource.author}/${updatedResource.name}/*`);
+  oldImages.forEach(async (image) => {
+    // console.log(image.split("images/")[1]);
+    const { error: imagesDeletionError } = await supabase.storage
+      .from("images")
+      .remove(image.split("images/")[1]);
+    if (imagesDeletionError) {
+      throw new Error("Unable to delete old images");
+    }
+  });
 
   fileNames.forEach(async (file, index) => {
     const { error: fileStorageError } = await supabase.storage

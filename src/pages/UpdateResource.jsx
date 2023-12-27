@@ -14,20 +14,21 @@ import { filetypes } from "../data/filetypes";
 import { levels } from "../data/levels";
 import { DropzoneField } from "../components/DropzoneField";
 import { useState } from "react";
+import { useResources } from "../features/resources/useResources";
 
 function UpdateResource() {
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const { resourceId } = useParams();
   const { user } = useUserSession();
-  // const { resources } = useResources();
+  const { resources } = useResources();
   // const { subjects } = useFilter();
   // const navigate = useNavigate();
   const { isUpdating, updateResource } = useUpdateResource();
 
-  // let filteredResource = resources.filter(
-  //   (resource) => resource.id === resourceId
-  // );
+  let filteredResource = resources.filter(
+    (resource) => resource.id === resourceId
+  );
 
   const { handleSubmit, reset, register, formState } = useForm({
     defaultValues: {},
@@ -36,9 +37,6 @@ function UpdateResource() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    // const image = typeof data.image === "string" ? data.image : data.image[0];
-    // const file = typeof data.file === "string" ? data.file : data.file[0];
-
     let tempSubject = subjects.filter(
       (subject) => subject.id === data.subject_id
     );
@@ -46,15 +44,16 @@ function UpdateResource() {
     data.author =
       user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
-    // console.log(image, file);
     updateResource(
       {
         newResourceData: { ...data, images: images, files: files },
         id: resourceId,
+        oldImages: filteredResource[0].images,
+        oldFiles: filteredResource[0].files,
       },
       {
         onSuccess: (data) => {
-          reset();
+          // reset();
         },
       }
     );
