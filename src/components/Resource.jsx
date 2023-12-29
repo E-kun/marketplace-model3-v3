@@ -8,6 +8,7 @@ import { Paper } from "@mui/material";
 import CustomButton from "./CustomButton";
 import { useUserSession } from "../features/users/useUserSession";
 import { Link } from "react-router-dom";
+import { useRegion } from "../features/contexts/RegionContext";
 
 const ResourceListing = styled(Paper)`
   margin: 2em auto;
@@ -45,9 +46,8 @@ const ResourceDetails = styled.div`
   justify-content: space-evenly;
 `;
 
-const imageList = ["1", "2", "3", "4", "5", "6", "7"];
-
 function Resource() {
+  const { region } = useRegion();
   const { user, isAuthenticated } = useUserSession();
   const { resourceId } = useParams();
   const { resources } = useResources();
@@ -57,9 +57,6 @@ function Resource() {
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
-
-  console.log(filteredResource);
-  // console.log(user);
 
   const {
     id,
@@ -74,7 +71,24 @@ function Resource() {
     files,
   } = filteredResource[0];
 
-  // console.log(filteredResource[0]);
+  let currency = "";
+
+  switch (region) {
+    case "malaysia":
+      currency = "MYR";
+      break;
+    case "brunei":
+      currency = "BND";
+      break;
+    case "singapore":
+      currency = "SGD";
+      break;
+    case "indonesia":
+      currency = "IDR";
+      break;
+    default:
+      break;
+  }
 
   function handleEditButton() {
     navigate(`/updateResource/${id}`, { replace: true });
@@ -86,33 +100,29 @@ function Resource() {
         <ResourceImageThumbnail src={images[0]} alt="Resource Image" />
         <ResourceDetails>
           <div>
-            {/* <h2>Test Resource</h2> */}
             <h2>{name}</h2>
           </div>
           <div>
             <h4>Resource Description</h4>
-            {/* <p>Test Description</p> */}
             <p>{description}</p>
           </div>
           <div>
             <h4>Subject: {subject}</h4>
-            {/* <h4>Subject: Subject</h4> */}
           </div>
           <div>
-            {/* <h4>Resource Type: PDF</h4> */}
             <h4>Resource Type: {type}</h4>
           </div>
           <div>
-            <h4>RM{price}</h4>
-            {/* <h4>RM10</h4> */}
+            <h4>
+              {currency}
+              {price}
+            </h4>
           </div>
           <div>
             <h4>Created On: {created_at}</h4>
-            {/* <h4>Created On: Current Date</h4> */}
           </div>
           <div>
             <h4>Author: {author}</h4>
-            {/* <h4>Author: John Smith</h4> */}
           </div>
         </ResourceDetails>
       </ResourceListing>

@@ -2,10 +2,8 @@ import { useForm } from "react-hook-form";
 
 import { useCreateResource } from "../features/resources/useCreateResource";
 import { useUserSession } from "../features/users/useUserSession";
-import { useFilter } from "../features/resources/useFilter";
 
 import FormRow from "../components/forms/FormRow";
-import CustomButton from "../components/CustomButton";
 import FormInputText from "../components/forms/FormInputText";
 import FormInputTextLong from "../components/forms/FormInputTextLong";
 
@@ -14,16 +12,16 @@ import { filetypes } from "../data/filetypes";
 import { levels } from "../data/levels";
 import { DropzoneField } from "../components/DropzoneField";
 import { useState } from "react";
+import { currencies } from "../data/currencies";
 
 function CreateResource() {
-  const { handleSubmit, reset, register, formState, control } = useForm({
+  const { handleSubmit, reset, register, formState } = useForm({
     defaultValues: {},
   });
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const { isCreating, createResource } = useCreateResource();
   const { user } = useUserSession();
-  // const { subjects } = useFilter();
 
   const isWorking = isCreating;
 
@@ -37,10 +35,12 @@ function CreateResource() {
     data.author =
       user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
+    console.log(data);
+
     createResource(
       { ...data, images: images, files: files },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           reset();
         },
       }
@@ -105,6 +105,13 @@ function CreateResource() {
         </FormRow>
 
         <FormRow label="Resource Price" error={errors?.price?.message}>
+          <select {...register("currency")}>
+            {currencies.map((currency) => (
+              <option value={currency.id} key={currency.id}>
+                {currency.name}
+              </option>
+            ))}
+          </select>
           <FormInputText
             type="number"
             id="price"

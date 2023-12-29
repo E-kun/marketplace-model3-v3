@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { useUserSession } from "../features/users/useUserSession";
 import { useUpdateResource } from "../features/resources/useUpdateResource";
 
-import CustomButton from "../components/CustomButton";
 import FormInputText from "../components/forms/FormInputText";
 import FormInputTextLong from "../components/forms/FormInputTextLong";
 import FormRow from "../components/forms/FormRow";
@@ -15,6 +14,7 @@ import { levels } from "../data/levels";
 import { DropzoneField } from "../components/DropzoneField";
 import { useState } from "react";
 import { useResources } from "../features/resources/useResources";
+import { currencies } from "../data/currencies";
 
 function UpdateResource() {
   const [files, setFiles] = useState([]);
@@ -22,8 +22,6 @@ function UpdateResource() {
   const { resourceId } = useParams();
   const { user } = useUserSession();
   const { resources } = useResources();
-  // const { subjects } = useFilter();
-  // const navigate = useNavigate();
   const { isUpdating, updateResource } = useUpdateResource();
 
   let filteredResource = resources.filter(
@@ -52,7 +50,7 @@ function UpdateResource() {
         oldFiles: filteredResource[0].files,
       },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           reset();
         },
       }
@@ -117,6 +115,13 @@ function UpdateResource() {
         </FormRow>
 
         <FormRow label="Resource Price" error={errors?.price?.message}>
+          <select {...register("currency")}>
+            {currencies.map((currency) => (
+              <option value={currency.id} key={currency.id}>
+                {currency.name}
+              </option>
+            ))}
+          </select>
           <FormInputText
             type="number"
             id="price"

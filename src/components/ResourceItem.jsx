@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import styled from "@emotion/styled";
 import { Grid, Paper } from "@mui/material";
+import { useRegion } from "../features/contexts/RegionContext";
+import { useCurrency } from "../../archive/useCurrency";
 
 const StyledResourceName = styled.h3`
   align-self: flex-start;
@@ -29,7 +31,29 @@ const StyledResourceImage = styled.img`
 `;
 
 function ResourceItem({ resource }) {
+  const { region } = useRegion();
+  // const { currency, changeCurrency } = useCurrency();
   const { name, price, subject, description, id, images } = resource;
+
+  // changeCurrency(region);
+  let currency = "";
+
+  switch (region) {
+    case "malaysia":
+      currency = "MYR";
+      break;
+    case "brunei":
+      currency = "BND";
+      break;
+    case "singapore":
+      currency = "SGD";
+      break;
+    case "indonesia":
+      currency = "IDR";
+      break;
+    default:
+      break;
+  }
 
   return (
     <StyledResourceItem>
@@ -55,7 +79,10 @@ function ResourceItem({ resource }) {
                 </Grid>
               </Grid>
               <Grid item>
-                <h4>RM{price}</h4>
+                <h4>
+                  {currency}
+                  {price}
+                </h4>
               </Grid>
             </Grid>
           </Grid>

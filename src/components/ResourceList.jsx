@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import { CircularProgress } from "@mui/material";
 import { useResources } from "../features/resources/useResources";
 import { useFilter } from "../features/resources/useFilter";
+import { useRegion } from "../features/contexts/RegionContext";
 
 const ResourceListBox = styled.div`
   display: flex;

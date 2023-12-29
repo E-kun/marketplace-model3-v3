@@ -7,16 +7,16 @@ import {
   Container,
   Grid,
   MenuItem,
-  MenuList,
   Select,
   Toolbar,
 } from "@mui/material";
 
 import Logo from "./Logo";
 import { useUserSession } from "../features/users/useUserSession";
-import { Feedback, Flag } from "@mui/icons-material";
+import { Feedback } from "@mui/icons-material";
 
 import { useLogout } from "../features/users/useLogout";
+import { useRegion } from "../features/contexts/RegionContext";
 
 const StyledNavLink = styled(NavLink)`
   padding: 1.2rem 4.8rem;
@@ -40,6 +40,7 @@ const FlagIcon = styled.img`
 `;
 
 function Navbar() {
+  const { setRegion } = useRegion();
   const { logout, isLoading } = useLogout();
   const { isAuthenticated } = useUserSession();
 
@@ -55,7 +56,10 @@ function Navbar() {
             <Logo />
           </Grid>
 
-          <Select defaultValue="malaysia">
+          <Select
+            defaultValue="malaysia"
+            onChange={(e) => setRegion(e.target.value)}
+          >
             <MenuItem value="malaysia">
               <FlagIcon src="/MY-Malaysia-Flag-icon.png" />
             </MenuItem>
