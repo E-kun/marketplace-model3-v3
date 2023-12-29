@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+
+import { RegionProvider } from "./features/contexts/RegionContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
 import PageNotFound from "./pages/PageNotFound";
@@ -10,15 +14,12 @@ import Resource from "./pages/Resource";
 import Login from "./pages/Login";
 import CreateResource from "./pages/CreateResource";
 import UpdateResource from "./pages/UpdateResource";
-import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./pages/AppLayout";
 import UserOnlyPages from "./pages/UserOnlyPages";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 import ProvideFeedback from "./pages/ProvideFeedback";
-import { Toaster } from "react-hot-toast";
 import Admin from "./pages/Admin";
-import { RegionProvider } from "./features/contexts/RegionContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
