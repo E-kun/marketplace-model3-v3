@@ -1,50 +1,18 @@
+import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router";
-
-import styled from "@emotion/styled";
 import { css } from "@emotion/css";
+
 import { useResources } from "../features/resources/useResources";
 import { useDeleteResource } from "../features/resources/useDeleteResource";
-import { Paper } from "@mui/material";
-import CustomButton from "./CustomButton";
 import { useUserSession } from "../features/users/useUserSession";
-import { Link } from "react-router-dom";
 import { useRegion } from "../features/contexts/RegionContext";
 
-const ResourceListing = styled(Paper)`
-  margin: 2em auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  max-width: 100vh;
-  background-color: #eee7e7;
-  padding: 1rem;
-  /* box-shadow: -2px 2px 5px; */
-`;
-
-const ResourceImageThumbnail = styled.img`
-  width: 50%;
-  height: 50%;
-  margin: 2rem;
-`;
-
-const ResourceGallery = styled.ul`
-  margin: 2em auto;
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  overflow-x: auto;
-`;
-
-const ResourceGalleryImage = styled.img`
-  width: 200px;
-  height: 150px;
-`;
-
-const ResourceDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
+import CustomButton from "../components/ui/CustomButton";
+import { ResourceListing } from "../components/styled_components/resource/ResourceListing";
+import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
+import { ResourceDetails } from "../components/styled_components/resource/ResourceDetails";
+import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
+import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
 
 function Resource() {
   const { region } = useRegion();
@@ -134,7 +102,7 @@ function Resource() {
               disabled={isDeleting}
               onClick={() => {}}
               variant="contained"
-              color="primary"
+              color="secondary"
             >
               <Link to={files[0]}>Retrieve Resource Files</Link>
             </CustomButton>

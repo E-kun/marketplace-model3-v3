@@ -6,7 +6,7 @@ import "./App.css";
 import PageNotFound from "./pages/PageNotFound";
 import Homepage from "./pages/Homepage";
 import Catalogue from "./pages/Catalogue";
-import Resource from "./components/Resource";
+import Resource from "./pages/Resource";
 import Login from "./pages/Login";
 import CreateResource from "./pages/CreateResource";
 import UpdateResource from "./pages/UpdateResource";

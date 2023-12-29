@@ -1,5 +1,5 @@
 import CustomButton from "./CustomButton";
-import { useLogout } from "../features/users/useLogout";
+import { useLogout } from "../../features/users/useLogout";
 import { CircularProgress } from "@mui/material";
 
 function Logout() {

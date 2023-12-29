@@ -1,16 +1,12 @@
-import styles from "./Footer.module.css";
-import styled from "@emotion/styled";
-
-const StyledFooter = styled.footer`
-  color: black;
-`;
+import { Copyright } from "../styled_components/footer/Copyright";
+import { StyledFooter } from "../styled_components/footer/StyledFooter";
 
 function Footer() {
   return (
     <StyledFooter>
-      <p className={styles.copyright}>
+      <Copyright>
         &copy; Copyright {new Date().getFullYear()} by Edcatus
-      </p>
+      </Copyright>
       <p>Alpha version 1.0.0</p>
     </StyledFooter>
   );

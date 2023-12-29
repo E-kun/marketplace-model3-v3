@@ -1,23 +1,12 @@
 import ResourceItem from "./ResourceItem";
-import styles from "./ResourceList.module.css";
-
-import styled from "@emotion/styled";
 import { CircularProgress } from "@mui/material";
-import { useResources } from "../features/resources/useResources";
-import { useFilter } from "../features/resources/useFilter";
-import { useRegion } from "../features/contexts/RegionContext";
 
-const ResourceListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  max-height: 100%;
-  flex: 1;
-`;
+import { useResources } from "../../features/resources/useResources";
+import { ResourceListBox } from "../styled_components/resource-list/ResourceListBox";
+import { StyledResourceList } from "../styled_components/resource-list/StyledResourceList";
 
 function ResourceList({ filterValues }) {
   const { isLoading, resources } = useResources();
-  const { subjects } = useFilter();
 
   let filteredResources = resources;
   let minPrice = 0;
@@ -29,9 +18,6 @@ function ResourceList({ filterValues }) {
     filteredType: "",
   };
 
-  // console.log(typeof resources[6].files);
-
-  //Price, subject, level, type
   if (filterValues.some((value) => value !== "")) {
     filterValues.forEach((value, index) => {
       if (value !== undefined) {
@@ -54,7 +40,6 @@ function ResourceList({ filterValues }) {
       }
     });
     for (const [fType, fValue] of Object.entries(filter)) {
-      // console.log(fType, fValue);
       if (fType === "filteredPrice") {
         if (fValue === "low_price") {
           minPrice = 1;
@@ -110,11 +95,11 @@ function ResourceList({ filterValues }) {
   return (
     <ResourceListBox>
       {filteredResources.length > 0 ? (
-        <ul className={styles.resourceList}>
+        <StyledResourceList>
           {filteredResources.map((resource) => (
             <ResourceItem resource={resource} key={resource.id} />
           ))}
-        </ul>
+        </StyledResourceList>
       ) : (
         <h2>There are currently no resources for this filtered search.</h2>
       )}

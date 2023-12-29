@@ -1,14 +1,7 @@
 import { useState } from "react";
-import Filter from "../components/Filter";
-import ResourceList from "../components/ResourceList";
-
-import styled from "@emotion/styled";
-
-const CatalogueLayout = styled.div`
-  display: flex;
-  flex-direction: row;
-  max-height: 75vh;
-`;
+import Filter from "../components/ui/Filter";
+import ResourceList from "../components/ui/ResourceList";
+import { CatalogueLayout } from "../components/styled_components/catalogue/CatalogueLayout";
 
 function Catalogue() {
   const [selectedPrice, setSelectedPrice] = useState();

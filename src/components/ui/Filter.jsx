@@ -1,17 +1,8 @@
-import styled from "@emotion/styled";
-import { Button, FormControl, FormGroup } from "@mui/material";
-
-import FormInputDropdown from "./forms/FormInputDropdown";
 import { useForm } from "react-hook-form";
+import { Button } from "@mui/material";
 
-const StyledFilterWindow = styled.div`
-  max-width: 200px;
-  max-height: 600px;
-  padding: 2em;
-  background-color: #8fce9d;
-  margin: 1rem 0;
-  box-shadow: -5px 5px 5px #6ea179;
-`;
+import { StyledFilterWindow } from "../styled_components/filter/StyledFilterWindow";
+import FormInputDropdown from "../styled_components/forms/FormInputDropdown";
 
 function Filter({
   setSelectedPrice,
@@ -29,7 +20,6 @@ function Filter({
   });
 
   function onSubmit(data) {
-    // console.log(data);
     setSelectedPrice(data.price_range);
     setSelectedSubject(data.subject_id);
     setSelectedType(data.file_type);

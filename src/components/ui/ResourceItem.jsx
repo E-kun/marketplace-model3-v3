@@ -1,41 +1,15 @@
-import { Link } from "react-router-dom";
-
-import styled from "@emotion/styled";
 import { Grid, Paper } from "@mui/material";
-import { useRegion } from "../features/contexts/RegionContext";
-import { useCurrency } from "../../archive/useCurrency";
 
-const StyledResourceName = styled.h3`
-  align-self: flex-start;
-`;
-
-const StyledResourceItem = styled.li`
-  background-color: #94ec94;
-  max-width: 900px;
-`;
-
-const StyledResourceLink = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  align-content: space-between;
-  align-items: center;
-  /* padding: 0 1em; */
-`;
-
-const StyledResourceImage = styled.img`
-  margin-right: 1em;
-  margin: "auto";
-  display: "block";
-  max-width: 200px;
-  max-height: 150px;
-`;
+import { useRegion } from "../../features/contexts/RegionContext";
+import { StyledResourceItem } from "../styled_components/resource-item/StyledResourceItem";
+import { StyledResourceLink } from "../styled_components/resource-item/StyledResourceLink";
+import { StyledResourceImage } from "../styled_components/resource-item/StyledResourceImage";
+import { StyledResourceName } from "../styled_components/resource-item/StyledResourceName";
 
 function ResourceItem({ resource }) {
   const { region } = useRegion();
-  // const { currency, changeCurrency } = useCurrency();
   const { name, price, subject, description, id, images } = resource;
 
-  // changeCurrency(region);
   let currency = "";
 
   switch (region) {

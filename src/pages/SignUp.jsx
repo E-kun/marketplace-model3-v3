@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
-import FormInputText from "../components/forms/FormInputText";
-import CustomButton from "../components/CustomButton";
 import { useSignUp } from "../features/users/useSignUp";
-import FormRow from "../components/forms/FormRow";
+
+import FormRow from "../components/styled_components/forms/FormRow";
+import FormInputText from "../components/styled_components/forms/FormInputText";
 
 function SignUp() {
   const { handleSubmit, reset, register, formState } = useForm({
@@ -17,7 +17,7 @@ function SignUp() {
     signup(
       { firstName, lastName, email, password },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           reset();
         },
       }

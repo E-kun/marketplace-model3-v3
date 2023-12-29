@@ -4,14 +4,14 @@ import { useParams } from "react-router";
 import { useUserSession } from "../features/users/useUserSession";
 import { useUpdateResource } from "../features/resources/useUpdateResource";
 
-import FormInputText from "../components/forms/FormInputText";
-import FormInputTextLong from "../components/forms/FormInputTextLong";
-import FormRow from "../components/forms/FormRow";
+import FormInputText from "../components/styled_components/forms/FormInputText";
+import FormInputTextLong from "../components/styled_components/forms/FormInputTextLong";
+import FormRow from "../components/styled_components/forms/FormRow";
 
 import { subjects } from "../data/subjects";
 import { filetypes } from "../data/filetypes";
 import { levels } from "../data/levels";
-import { DropzoneField } from "../components/DropzoneField";
+import { DropzoneField } from "../components/ui/DropzoneField";
 import { useState } from "react";
 import { useResources } from "../features/resources/useResources";
 import { currencies } from "../data/currencies";
@@ -159,6 +159,5 @@ function UpdateResource() {
     </>
   );
 }
-// children, handleClick, variant, color
 
 export default UpdateResource;

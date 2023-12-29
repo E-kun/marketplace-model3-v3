@@ -1,11 +1,5 @@
-import styled from "@emotion/styled";
 import { Grid, Paper } from "@mui/material";
-
-const StyledFeedbackItem = styled.li`
-  /* background-color: #94ec94; */
-  margin: 1em;
-  max-width: 900px;
-`;
+import { StyledFeedbackItem } from "../styled_components/feedback/StyledFeedbackItem";
 
 function FeedbackItem(feedbackItem) {
   const { feedback: message, author } = feedbackItem.feedback;

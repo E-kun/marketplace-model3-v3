@@ -1,4 +1,6 @@
-.resourceList {
+import styled from "@emotion/styled";
+
+export const StyledResourceList = styled.ul`
   width: 100%;
   height: 100%;
   list-style: none;
@@ -7,8 +9,4 @@
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-}
-
-.resourceList::-webkit-scrollbar {
-  width: 0;
-}
+`;

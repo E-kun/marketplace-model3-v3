@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-import styled from "@emotion/styled";
 import AppBar from "@mui/material/AppBar";
 import {
   Button,
@@ -12,32 +10,14 @@ import {
 } from "@mui/material";
 
 import Logo from "./Logo";
-import { useUserSession } from "../features/users/useUserSession";
+import { useUserSession } from "../../features/users/useUserSession";
 import { Feedback } from "@mui/icons-material";
 
-import { useLogout } from "../features/users/useLogout";
-import { useRegion } from "../features/contexts/RegionContext";
-
-const StyledNavLink = styled(NavLink)`
-  padding: 1.2rem 4.8rem;
-  text-decoration: none;
-  color: white;
-  &:hover {
-    color: #33ffff;
-  }
-`;
-
-const UserCorner = styled(Grid)`
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: flex-end;
-`;
-
-const FlagIcon = styled.img`
-  width: 45px;
-  padding: 0 auto;
-`;
+import { useLogout } from "../../features/users/useLogout";
+import { useRegion } from "../../features/contexts/RegionContext";
+import { FlagIcon } from "../styled_components/navbar/FlagIcon";
+import { UserCorner } from "../styled_components/navbar/UserCorner";
+import { StyledNavLink } from "../styled_components/navbar/StyledNavLink";
 
 function Navbar() {
   const { setRegion } = useRegion();
@@ -98,10 +78,7 @@ function Navbar() {
                   <Feedback />
                 </StyledNavLink>
                 <StyledNavLink to="/profile">Profile</StyledNavLink>
-                {/* <IconButton>
-                  <PersonIcon fontSize="large" />
-                  
-                </IconButton> */}
+
                 <Button
                   disabled={isLoading}
                   onClick={handleLogout}

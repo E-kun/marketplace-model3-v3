@@ -1,12 +1,7 @@
 import styled from "@emotion/styled";
 import { S3Client } from "@aws-sdk/client-s3";
 
-import CustomButton from "../components/CustomButton";
-
 import { useForm } from "react-hook-form";
-import FormInputFile from "../components/forms/FormInputFile";
-
-import FileInputAlt from "../components/forms/FileInputAlt";
 
 const s3 = new S3Client({
   credentials: {

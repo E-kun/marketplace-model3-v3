@@ -1,22 +1,13 @@
-import styled from "@emotion/styled";
-
-import FormInputTextLong from "../components/forms/FormInputTextLong";
 import { useForm } from "react-hook-form";
-import CustomButton from "../components/CustomButton";
 import { useUserSession } from "../features/users/useUserSession";
 import { useSendFeedback } from "../features/users/useSendFeedback";
 import { useGetFeedback } from "../features/users/useGetFeedback";
-import FeedbackItem from "../components/FeedbackItem";
 
-const FeedbackBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const FeedbackList = styled.ul`
-  list-style: none;
-`;
+import CustomButton from "../components/ui/CustomButton";
+import FeedbackItem from "../components/ui/FeedbackItem";
+import FormInputTextLong from "../components/styled_components/forms/FormInputTextLong";
+import { FeedbackList } from "../components/styled_components/feedback/FeedbackList";
+import { FeedbackBox } from "../components/styled_components/feedback/FeedbackBox";
 
 function ProvideFeedback() {
   const { user } = useUserSession();
@@ -26,7 +17,7 @@ function ProvideFeedback() {
 
   const feedbackList = feedback || feedbackTemp;
 
-  const { handleSubmit, reset, control, setValue } = useForm({
+  const { handleSubmit, reset, control } = useForm({
     defaultValues: {},
   });
 
@@ -35,7 +26,7 @@ function ProvideFeedback() {
       user.user_metadata.firstName + " " + user.user_metadata.lastName;
 
     provideFeedback(data, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         reset();
       },
     });

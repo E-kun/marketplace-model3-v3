@@ -1,18 +1,6 @@
-import styled from "@emotion/styled";
-import { Avatar, Paper } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { useUserSession } from "../features/users/useUserSession";
-
-const ProfileBox = styled(Paper)`
-  margin: 2em auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100vh;
-  background-color: white;
-  /* background-color: #eee7e7; */
-  padding: 1rem;
-  /* box-shadow: -2px 2px 5px; */
-`;
+import { ProfileBox } from "../components/styled_components/profile/ProfileBox";
 
 function Profile() {
   const { user } = useUserSession();
