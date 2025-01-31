@@ -33,8 +33,8 @@ export async function createResourceApi(newResource) {
     fileNames.push(fileName);
     const filePath = hasFilePath
       ? newResource.files[i]
-      : `${supabaseUrl}/storage/buckets/files/${newResource.name}/${fileName}`;
-    // : `${supabaseUrl}/storage/buckets/files/${newResource.author}/${newResource.name}/${fileName}`;
+      : // : `${supabaseUrl}/storage/buckets/files/${newResource.name}/${fileName}`;
+        `${supabaseUrl}/storage/buckets/files/${newResource.author}/${newResource.name}/${fileName}`;
 
     console.log(filePath);
     filePaths.push(filePath);
@@ -49,8 +49,8 @@ export async function createResourceApi(newResource) {
     imageNames.push(imageName);
     const imagePath = hasImagePath
       ? newResource.images[i]
-      : `${supabaseUrl}/storage/buckets/images/${newResource.name}/${imageName}`;
-    // : `${supabaseUrl}/storage/buckets/images/${newResource.author}/${newResource.name}/${imageName}`;
+      : // : `${supabaseUrl}/storage/buckets/images/${newResource.name}/${imageName}`;
+        `${supabaseUrl}/storage/buckets/images/${newResource.author}/${newResource.name}/${imageName}`;
 
     imagePaths.push(imagePath);
   }
@@ -130,8 +130,8 @@ export async function updateResourceApi(
     fileNames.push(fileName);
     const filePath = hasFilePath
       ? updatedResource.files[i]
-      : `${supabaseUrl}/storage/buckets/files/${updatedResource.name}/${fileName}`;
-    // : `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
+      : // : `${supabaseUrl}/storage/buckets/files/${updatedResource.name}/${fileName}`;
+        `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
 
     filePaths.push(filePath);
   }
@@ -145,7 +145,7 @@ export async function updateResourceApi(
     imageNames.push(imageName);
     const imagePath = hasImagePath
       ? updatedResource.images[i]
-      : `${supabaseUrl}/storage/buckets/images/${updatedResource.name}/${imageName}`;
+      : `${supabaseUrl}/storage/buckets/images/${updatedResource.author}/${updatedResource.name}/${imageName}`;
 
     imagePaths.push(imagePath);
   }
