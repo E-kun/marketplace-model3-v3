@@ -63,8 +63,8 @@ export async function createResourceApi(newResource) {
     .insert([
       {
         ...newResource,
-        images: imagePaths,
-        files: filePaths,
+        // images: imagePaths,
+        // files: filePaths,
       },
     ])
     .select()
@@ -74,39 +74,39 @@ export async function createResourceApi(newResource) {
     throw new Error("Resource could not be created");
   }
 
-  fileNames.forEach(async (file, index) => {
-    // console.log(file, index, newResource.files[index]);
-    const { error: fileStorageError } = await supabase.storage
-      .from("files")
-      .upload(
-        `${newResource.author}/${newResource.name}/${file}`,
-        newResource.files[index]
-      );
-    if (fileStorageError) {
-      await supabase.from("resources").delete().eq("id", data.id);
-      console.error(fileStorageError);
-      throw new Error(
-        "The file was not uploaded and the resource was not created"
-      );
-    }
-  });
+  // fileNames.forEach(async (file, index) => {
+  //   // console.log(file, index, newResource.files[index]);
+  //   const { error: fileStorageError } = await supabase.storage
+  //     .from("files")
+  //     .upload(
+  //       `${newResource.author}/${newResource.name}/${file}`,
+  //       newResource.files[index]
+  //     );
+  //   if (fileStorageError) {
+  //     await supabase.from("resources").delete().eq("id", data.id);
+  //     console.error(fileStorageError);
+  //     throw new Error(
+  //       "The file was not uploaded and the resource was not created"
+  //     );
+  //   }
+  // });
 
-  imageNames.forEach(async (image, index) => {
-    // console.log(image, index, newResource.images[index]);
-    const { error: imageStorageError } = await supabase.storage
-      .from("images")
-      .upload(
-        `${newResource.author}/${newResource.name}/${image}`,
-        newResource.images[index]
-      );
-    if (imageStorageError) {
-      await supabase.from("resources").delete().eq("id", data.id);
-      console.error(imageStorageError);
-      throw new Error(
-        "The image was not uploaded and the resource was not created"
-      );
-    }
-  });
+  // imageNames.forEach(async (image, index) => {
+  //   // console.log(image, index, newResource.images[index]);
+  //   const { error: imageStorageError } = await supabase.storage
+  //     .from("images")
+  //     .upload(
+  //       `${newResource.author}/${newResource.name}/${image}`,
+  //       newResource.images[index]
+  //     );
+  //   if (imageStorageError) {
+  //     await supabase.from("resources").delete().eq("id", data.id);
+  //     console.error(imageStorageError);
+  //     throw new Error(
+  //       "The image was not uploaded and the resource was not created"
+  //     );
+  //   }
+  // });
 
   return data;
 }
