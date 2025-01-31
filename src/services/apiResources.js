@@ -33,7 +33,8 @@ export async function createResourceApi(newResource) {
     fileNames.push(fileName);
     const filePath = hasFilePath
       ? newResource.files[i]
-      : `${supabaseUrl}/storage/buckets/files/${newResource.author}/${newResource.name}/${fileName}`;
+      : `${supabaseUrl}/storage/buckets/files/${newResource.name}/${fileName}`;
+    // : `${supabaseUrl}/storage/buckets/files/${newResource.author}/${newResource.name}/${fileName}`;
 
     console.log(filePath);
     filePaths.push(filePath);
@@ -48,7 +49,8 @@ export async function createResourceApi(newResource) {
     imageNames.push(imageName);
     const imagePath = hasImagePath
       ? newResource.images[i]
-      : `${supabaseUrl}/storage/buckets/images/${newResource.author}/${newResource.name}/${imageName}`;
+      : `${supabaseUrl}/storage/buckets/images/${newResource.name}/${imageName}`;
+    // : `${supabaseUrl}/storage/buckets/images/${newResource.author}/${newResource.name}/${imageName}`;
 
     console.log(imagePaths);
     imagePaths.push(imagePath);
