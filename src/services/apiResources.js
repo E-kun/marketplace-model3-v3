@@ -126,7 +126,8 @@ export async function updateResourceApi(
     fileNames.push(fileName);
     const filePath = hasFilePath
       ? updatedResource.files[i]
-      : `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
+      : `${supabaseUrl}/storage/buckets/files/${updatedResource.name}/${fileName}`;
+    // : `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
 
     filePaths.push(filePath);
   }
@@ -140,7 +141,7 @@ export async function updateResourceApi(
     imageNames.push(imageName);
     const imagePath = hasImagePath
       ? updatedResource.images[i]
-      : `${supabaseUrl}/storage/buckets/images/${updatedResource.author}/${updatedResource.name}/${imageName}`;
+      : `${supabaseUrl}/storage/buckets/images/${updatedResource.name}/${imageName}`;
 
     imagePaths.push(imagePath);
   }
