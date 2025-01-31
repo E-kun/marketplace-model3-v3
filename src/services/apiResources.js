@@ -35,6 +35,7 @@ export async function createResourceApi(newResource) {
       ? newResource.files[i]
       : `${supabaseUrl}/storage/v1/object/files/${newResource.author}/${newResource.name}/${fileName}`;
 
+    console.log(filePath);
     filePaths.push(filePath);
   }
 
@@ -49,6 +50,7 @@ export async function createResourceApi(newResource) {
       ? newResource.images[i]
       : `${supabaseUrl}/storage/v1/object/public/images/${newResource.author}/${newResource.name}/${imageName}`;
 
+    console.log(imagePaths);
     imagePaths.push(imagePath);
   }
 
