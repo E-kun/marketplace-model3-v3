@@ -52,9 +52,11 @@ export async function createResourceApi(newResource) {
       : `${supabaseUrl}/storage/buckets/images/${newResource.name}/${imageName}`;
     // : `${supabaseUrl}/storage/buckets/images/${newResource.author}/${newResource.name}/${imageName}`;
 
-    console.log(imagePaths);
     imagePaths.push(imagePath);
   }
+
+  console.log(filePaths);
+  console.log(imagePaths);
 
   const { data, error } = await supabase
     .from("resources")
