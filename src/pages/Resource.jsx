@@ -9,7 +9,7 @@ import { useRegion } from "../features/contexts/RegionContext";
 
 import CustomButton from "../components/ui/CustomButton";
 import { ResourceListing } from "../components/styled_components/resource/ResourceListing";
-import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
+// import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
 import { ResourceDetails } from "../components/styled_components/resource/ResourceDetails";
 // import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
 // import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
@@ -35,8 +35,8 @@ function Resource() {
     subject,
     file_type: type,
     author,
-    images,
-    files,
+    // images,
+    // files,
   } = filteredResource[0];
 
   let currency = "";
@@ -104,7 +104,7 @@ function Resource() {
               variant="contained"
               color="secondary"
             >
-              <Link to={files[0]}>Retrieve Resource Files</Link>
+              {/* <Link to={files[0]}>Retrieve Resource Files</Link> */}
             </CustomButton>
             <CustomButton
               disabled={isDeleting}
