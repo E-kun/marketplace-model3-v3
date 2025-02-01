@@ -10,6 +10,8 @@ function ResourceItem({ resource }) {
   const { region } = useRegion();
   const { name, price, subject, description, id } = resource;
   // const { name, price, subject, description, id, images } = resource;
+  console.log(resource);
+  console.log({ name, price, subject, description, id });
 
   let currency = "";
 
