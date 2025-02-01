@@ -25,9 +25,10 @@ function Resource() {
 
   console.log(`Resource Page resources: ${resources}`);
   console.log(`Resource Page retrieved ID: ${resourceId}`);
-  let filteredResource = resources.filter(
-    (resource) => resource.id === resourceId
-  );
+  let filteredResource = resources.filter((resource) => {
+    console.log(resource.id);
+    resource.id === resourceId;
+  });
   console.log(`Resource Page filtered resource: ${filteredResource}`);
 
   const {
