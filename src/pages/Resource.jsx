@@ -26,6 +26,7 @@ function Resource() {
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
+  console.log(filteredResource);
 
   const {
     // id,
@@ -39,6 +40,8 @@ function Resource() {
     // images,
     // files,
   } = filteredResource[0];
+
+  console.log(filteredResource[0]);
 
   let currency = "";
 
