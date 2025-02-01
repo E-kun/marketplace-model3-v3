@@ -8,7 +8,8 @@ import { StyledResourceName } from "../styled_components/resource-item/StyledRes
 
 function ResourceItem({ resource }) {
   const { region } = useRegion();
-  const { name, price, subject, description, id, images } = resource;
+  const { name, price, subject, description, id } = resource;
+  // const { name, price, subject, description, id, images } = resource;
 
   let currency = "";
 
@@ -42,7 +43,11 @@ function ResourceItem({ resource }) {
         >
           <Grid container spacing={2}>
             <Grid item>
-              <StyledResourceImage src={images[0]} alt="resource thumbnail" />
+              <StyledResourceImage
+                src="https://thumb.ac-illust.com/28/284b06f3d622fd0c516f73b52625a117_t.jpeg"
+                alt="resource thumbnail"
+              />
+              {/* <StyledResourceImage src={images[0]} alt="resource thumbnail" /> */}
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>

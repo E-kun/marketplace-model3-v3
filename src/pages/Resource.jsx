@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router";
-// import { css } from "@emotion/css";
+import { css } from "@emotion/css";
 
 import { useResources } from "../features/resources/useResources";
 import { useDeleteResource } from "../features/resources/useDeleteResource";
@@ -9,10 +9,10 @@ import { useRegion } from "../features/contexts/RegionContext";
 
 import CustomButton from "../components/ui/CustomButton";
 import { ResourceListing } from "../components/styled_components/resource/ResourceListing";
-// import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
+import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
 import { ResourceDetails } from "../components/styled_components/resource/ResourceDetails";
-// import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
-// import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
+import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
+import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
 
 function Resource() {
   const { region } = useRegion();
@@ -35,8 +35,8 @@ function Resource() {
     subject,
     file_type: type,
     author,
-    // images,
-    // files,
+    images,
+    files,
   } = filteredResource[0];
 
   let currency = "";
@@ -65,7 +65,7 @@ function Resource() {
   return (
     <>
       <ResourceListing>
-        {/* <ResourceImageThumbnail src={images[0]} alt="Resource Image" /> */}
+        <ResourceImageThumbnail src={images[0]} alt="Resource Image" />
         <ResourceDetails>
           <div>
             <h2>{name}</h2>
@@ -104,7 +104,7 @@ function Resource() {
               variant="contained"
               color="secondary"
             >
-              {/* <Link to={files[0]}>Retrieve Resource Files</Link> */}
+              <Link to={files[0]}>Retrieve Resource Files</Link>
             </CustomButton>
             <CustomButton
               disabled={isDeleting}
@@ -124,7 +124,7 @@ function Resource() {
             </CustomButton>
           </>
         )}
-      {/* <ResourceGallery>
+      <ResourceGallery>
         {images.map((image) => (
           <li
             key={image}
@@ -140,7 +140,7 @@ function Resource() {
             <ResourceGalleryImage src={image} alt={image} />
           </li>
         ))}
-      </ResourceGallery> */}
+      </ResourceGallery>
     </>
   );
 }
