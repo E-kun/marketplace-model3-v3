@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router";
-import { css } from "@emotion/css";
+// import { css } from "@emotion/css";
 
 import { useResources } from "../features/resources/useResources";
 import { useDeleteResource } from "../features/resources/useDeleteResource";
@@ -11,8 +11,8 @@ import CustomButton from "../components/ui/CustomButton";
 import { ResourceListing } from "../components/styled_components/resource/ResourceListing";
 import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
 import { ResourceDetails } from "../components/styled_components/resource/ResourceDetails";
-import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
-import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
+// import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
+// import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
 
 function Resource() {
   const { region } = useRegion();
@@ -65,7 +65,7 @@ function Resource() {
   return (
     <>
       <ResourceListing>
-        <ResourceImageThumbnail src={images[0]} alt="Resource Image" />
+        {/* <ResourceImageThumbnail src={images[0]} alt="Resource Image" /> */}
         <ResourceDetails>
           <div>
             <h2>{name}</h2>
