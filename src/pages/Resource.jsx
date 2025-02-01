@@ -23,6 +23,7 @@ function Resource() {
   const { isDeleting, deleteResource } = useDeleteResource();
   // const navigate = useNavigate();
 
+  console.log(resources);
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
