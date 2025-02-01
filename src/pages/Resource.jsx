@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router";
-import { css } from "@emotion/css";
+// import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+// import { useNavigate, useParams } from "react-router";
+// import { css } from "@emotion/css";
 
 import { useResources } from "../features/resources/useResources";
 import { useDeleteResource } from "../features/resources/useDeleteResource";
@@ -11,8 +12,8 @@ import CustomButton from "../components/ui/CustomButton";
 import { ResourceListing } from "../components/styled_components/resource/ResourceListing";
 import { ResourceImageThumbnail } from "../components/styled_components/resource/ResourceImageThumbnail";
 import { ResourceDetails } from "../components/styled_components/resource/ResourceDetails";
-import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
-import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
+// import { ResourceGallery } from "../components/styled_components/resource/ResourceGallery";
+// import { ResourceGalleryImage } from "../components/styled_components/resource/ResourceGalleryImage";
 
 function Resource() {
   const { region } = useRegion();
@@ -20,14 +21,14 @@ function Resource() {
   const { resourceId } = useParams();
   const { resources } = useResources();
   const { isDeleting, deleteResource } = useDeleteResource();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
 
   const {
-    id,
+    // id,
     created_at,
     name,
     description,
@@ -35,8 +36,8 @@ function Resource() {
     subject,
     file_type: type,
     author,
-    images,
-    files,
+    // images,
+    // files,
   } = filteredResource[0];
 
   let currency = "";
@@ -58,14 +59,17 @@ function Resource() {
       break;
   }
 
-  function handleEditButton() {
-    navigate(`/updateResource/${id}`, { replace: true });
-  }
+  // function handleEditButton() {
+  //   navigate(`/updateResource/${id}`, { replace: true });
+  // }
 
   return (
     <>
       <ResourceListing>
-        <ResourceImageThumbnail src={images[0]} alt="Resource Image" />
+        <ResourceImageThumbnail
+          src="https://thumb.ac-illust.com/28/284b06f3d622fd0c516f73b52625a117_t.jpeg"
+          alt="Resource Image"
+        />
         <ResourceDetails>
           <div>
             <h2>{name}</h2>
@@ -98,7 +102,7 @@ function Resource() {
         user.user_metadata.firstName + " " + user.user_metadata.lastName ===
           author && (
           <>
-            <CustomButton
+            {/* <CustomButton
               disabled={isDeleting}
               onClick={() => {}}
               variant="contained"
@@ -113,7 +117,7 @@ function Resource() {
               color="primary"
             >
               Update Resource
-            </CustomButton>
+            </CustomButton> */}
             <CustomButton
               disabled={isDeleting}
               onClick={() => deleteResource(resourceId)}
@@ -124,7 +128,7 @@ function Resource() {
             </CustomButton>
           </>
         )}
-      <ResourceGallery>
+      {/* <ResourceGallery>
         {images.map((image) => (
           <li
             key={image}
@@ -140,7 +144,7 @@ function Resource() {
             <ResourceGalleryImage src={image} alt={image} />
           </li>
         ))}
-      </ResourceGallery>
+      </ResourceGallery> */}
     </>
   );
 }
