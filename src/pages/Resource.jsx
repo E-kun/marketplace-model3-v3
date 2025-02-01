@@ -24,13 +24,13 @@ function Resource() {
   // const navigate = useNavigate();
 
   // console.log(`Resource Page resources: ${resources}`);
-  resources.forEach((resource) =>
-    console.log(`Resources ForEach: ${resource}`)
-  );
-  console.log(`Resource Page retrieved ID: ${resourceId}`);
+  // resources.forEach((resource) =>
+  //   console.log(`Resources ForEach: ${resource}`)
+  // );
+  // console.log(`Resource Page retrieved ID: ${resourceId}`);
   let filteredResource = resources.filter((resource) => {
-    console.log(resource.id);
-    resource.id === resourceId;
+    // console.log(resource.id);
+    resource.id == resourceId;
   });
   console.log(`Resource Page filtered resource: ${filteredResource}`);
 
