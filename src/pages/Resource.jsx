@@ -124,7 +124,7 @@ function Resource() {
             </CustomButton>
           </>
         )}
-      <ResourceGallery>
+      {/* <ResourceGallery>
         {images.map((image) => (
           <li
             key={image}
@@ -140,7 +140,7 @@ function Resource() {
             <ResourceGalleryImage src={image} alt={image} />
           </li>
         ))}
-      </ResourceGallery>
+      </ResourceGallery> */}
     </>
   );
 }

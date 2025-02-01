@@ -122,30 +122,32 @@ export async function updateResourceApi(
   const fileNames = [];
   const imageNames = [];
   for (let i = 0; i < updatedResource.files.length; i++) {
-    const hasFilePath = updatedResource.files[i]?.startsWith?.(supabaseUrl);
+    // const hasFilePath = updatedResource.files[i]?.startsWith?.(supabaseUrl);
 
     const fileName = `${Math.random()}-${
       updatedResource.files[i].name
     }`.replaceAll("/", "");
     fileNames.push(fileName);
-    const filePath = hasFilePath
-      ? updatedResource.files[i]
-      : // : `${supabaseUrl}/storage/buckets/files/${updatedResource.name}/${fileName}`;
-        `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
+    const filePath = "";
+    // const filePath = hasFilePath
+    //   ? updatedResource.files[i]
+    //   : // : `${supabaseUrl}/storage/buckets/files/${updatedResource.name}/${fileName}`;
+    //     `${supabaseUrl}/storage/buckets/files/${updatedResource.author}/${updatedResource.name}/${fileName}`;
 
     filePaths.push(filePath);
   }
 
   for (let i = 0; i < updatedResource.images.length; i++) {
-    const hasImagePath = updatedResource.images[i]?.startsWith?.(supabaseUrl);
+    // const hasImagePath = updatedResource.images[i]?.startsWith?.(supabaseUrl);
 
     const imageName = `${Math.random()}-${
       updatedResource.images[i].name
     }`.replaceAll("/", "");
     imageNames.push(imageName);
-    const imagePath = hasImagePath
-      ? updatedResource.images[i]
-      : `${supabaseUrl}/storage/buckets/images/${updatedResource.author}/${updatedResource.name}/${imageName}`;
+    const imagePath = "";
+    // const imagePath = hasImagePath
+    //   ? updatedResource.images[i]
+    //   : `${supabaseUrl}/storage/buckets/images/${updatedResource.author}/${updatedResource.name}/${imageName}`;
 
     imagePaths.push(imagePath);
   }
@@ -182,37 +184,37 @@ export async function updateResourceApi(
     }
   });
 
-  fileNames.forEach(async (file, index) => {
-    const { error: fileStorageError } = await supabase.storage
-      .from("files")
-      .upload(
-        `${updatedResource.author}/${updatedResource.name}/${file}`,
-        updatedResource.files[index]
-      );
-    if (fileStorageError) {
-      await supabase.from("resources").delete().eq("id", data.id);
-      console.error(fileStorageError);
-      throw new Error(
-        "The file was not uploaded and the resource was not created"
-      );
-    }
-  });
+  // fileNames.forEach(async (file, index) => {
+  //   const { error: fileStorageError } = await supabase.storage
+  //     .from("files")
+  //     .upload(
+  //       `${updatedResource.author}/${updatedResource.name}/${file}`,
+  //       updatedResource.files[index]
+  //     );
+  //   if (fileStorageError) {
+  //     await supabase.from("resources").delete().eq("id", data.id);
+  //     console.error(fileStorageError);
+  //     throw new Error(
+  //       "The file was not uploaded and the resource was not created"
+  //     );
+  //   }
+  // });
 
-  imageNames.forEach(async (image, index) => {
-    const { error: imageStorageError } = await supabase.storage
-      .from("images")
-      .upload(
-        `${updatedResource.author}/${updatedResource.name}/${image}`,
-        updatedResource.images[index]
-      );
-    if (imageStorageError) {
-      await supabase.from("resources").delete().eq("id", data.id);
-      console.error(imageStorageError);
-      throw new Error(
-        "The image was not uploaded and the resource was not created"
-      );
-    }
-  });
+  // imageNames.forEach(async (image, index) => {
+  //   const { error: imageStorageError } = await supabase.storage
+  //     .from("images")
+  //     .upload(
+  //       `${updatedResource.author}/${updatedResource.name}/${image}`,
+  //       updatedResource.images[index]
+  //     );
+  //   if (imageStorageError) {
+  //     await supabase.from("resources").delete().eq("id", data.id);
+  //     console.error(imageStorageError);
+  //     throw new Error(
+  //       "The image was not uploaded and the resource was not created"
+  //     );
+  //   }
+  // });
 
   return data;
 }
