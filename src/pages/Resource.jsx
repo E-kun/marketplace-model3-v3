@@ -24,9 +24,7 @@ function Resource() {
   // const navigate = useNavigate();
 
   // console.log(`Resource Page resources: ${resources}`);
-  for (const resource in resources) {
-    console.log(resource);
-  }
+  resources.forEach((resource) => console.log(resource));
   console.log(`Resource Page retrieved ID: ${resourceId}`);
   let filteredResource = resources.filter((resource) => {
     console.log(resource.id);
