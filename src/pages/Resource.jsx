@@ -24,6 +24,7 @@ function Resource() {
   // const navigate = useNavigate();
 
   console.log(resources);
+  console.log(resourceId);
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
