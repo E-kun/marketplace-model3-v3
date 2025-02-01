@@ -23,12 +23,12 @@ function Resource() {
   const { isDeleting, deleteResource } = useDeleteResource();
   // const navigate = useNavigate();
 
-  console.log(resources);
-  console.log(resourceId);
+  console.log(`Resource Page resources: ${resources}`);
+  console.log(`Resource Page retrieved ID: ${resourceId}`);
   let filteredResource = resources.filter(
     (resource) => resource.id === resourceId
   );
-  console.log(filteredResource);
+  console.log(`Resource Page filtered resource: ${filteredResource}`);
 
   const {
     // id,
@@ -43,7 +43,7 @@ function Resource() {
     // files,
   } = filteredResource[0];
 
-  console.log(filteredResource[0]);
+  console.log(`Resource Page filtered resource: ${filteredResource[0]}`);
 
   let currency = "";
 

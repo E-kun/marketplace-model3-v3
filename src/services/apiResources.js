@@ -3,7 +3,7 @@ import { subjects } from "../data/subjects";
 
 export async function getResources() {
   const { data, error } = await supabase.from("resources").select("*");
-  console.log(data);
+  console.log(`Supabase API Call ${data}`);
   // console.log(typeof data[6].images);
   if (error) {
     console.error(error);

@@ -7,7 +7,7 @@ import { StyledResourceList } from "../styled_components/resource-list/StyledRes
 
 function ResourceList({ filterValues }) {
   const { isLoading, resources } = useResources();
-  console.log(resources);
+  console.log(`ResourceList: ${resources}`);
 
   let filteredResources = resources;
   let minPrice = 0;
